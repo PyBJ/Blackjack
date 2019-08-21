@@ -1,0 +1,10 @@
+Group 2 Project Expectations
+Jesse Shinol
+Sabal Dhakal
+Nathan Hancock
+Trevor McDougald
+
+	The product that our team will produce is a 2-dimensional BlackJack Game developed using python. The code sharing platform that has been decided on will be GitHub. We will additionally be using ZenHub to manage and track a time schedule for milestones and issues and the allocation of work.
+
+	The blackjack simulator will include dealer, other ai players and a user which will have a User() object. Dealer() object will be able to deal cards and hit when required to beat the User object and the AIplayer() object. Before each game begins the user will be able to choose an old account or make a new one if all chips have been lost. The user account will store account history and achievements in a csv file or a light database. The deck could also have a class for shuffling and could hold a list of cards that will be shuffled with a shuffle() function. At the beginning the User() will have only two options for development sake that are hit or stand. 
+The first step to implement this game would have a two person nonAI local game with one person choosing to be dealer the other choosing to be player. AI and more AI player can be added at a later date. Stretch goals would be adding the split functionality when given two of the same cards. Adding a GUI that allows for online play. The GUI will use the arrow buttons for switching between selections, an “A” button for making a selection, and a “B” button for going back. The game logic will be implemented with an AbstractController() that derives into our Dealer(), User(), Cards() classes together in one BlackJackTable() class. 

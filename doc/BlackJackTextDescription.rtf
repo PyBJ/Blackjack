@@ -1,0 +1,96 @@
+Jesse Shinol
+Sabal Dhakal
+Nathan Hancock
+Trevor McDougald
+
+    In the BlackJack Project we follow the Model-View-Controller design pattern. We have created a blackjack game for our
+software engineering project. The src folder contains all of our source code. Our control has python
+files: blackjack_controller, config, dealer,control_view, and player with three test files for controlview, testplayer,
+and blackjackcontroller.
+Our Model has a DECK with all of our image files for the deck and python files
+called:deck, card,and hand and two test file for card and deck.
+Our test contains copies of the testcases performed throughout the code for a centralized loaction to see all the testcases.
+Our View contains sound effects for our card draws, and  python files: init, button,menu,soundeffects, and table.
+    The control code deals with the logic of the game, blackjackController performs the dealing to both the player and
+the dealer, the hits for each, grabbing a new shoe of decks, and implements the algorithm used to decide who has won
+the hand by comparing the score value of the dealers hand against the score value of the player.
+The algorithm we used for our dealer was a simple set of cases where if the dealer has less than 17 score value then
+he hits. Furthermore, there is an algorithm in class dealer that states the first card dealt to the dealer will remain
+face down until the end of the hand, whereupon it will be turned face up. In class player an algorithm is used to determine
+whether the players first two cards equal to 21 and if so player has blackjack. Player also contains an algorithm that
+determines the score value of the cards based on rank, with a special case of ace being either 11 or 1 being automatically
+determined based on the total score value. Class Player is passed as a parameter to class Dealer so all functions of
+Player are shared by the Dealer class.The control_view class acts as the driver for the system and runs the loop for
+the game GUI. The menu, game, and new hand screens are all called through this class in a loop.
+    The model code deals with the creation of our classes that will be used to perform the game. The Card class creates
+suits and ranks for each card and reads in the image files from the DECK folder that depict each card and assigns the
+corresponding suit and class. The Deck class (different from the folder DECK containing images) takes each card and creates
+6 decks of cards to form a deck shoe and then randomly shuffles those 6 decks of cards together.
+    The View code deals with the GUI aspect of our system and pygame library is used to help in the creation of the GUI
+and assist with convenient GUI oriented functions. Class Button tracks the user mouse location and mouse clicks
+using a function of the pygame library and uses a simple algorithm to determine if the mouse is hovering over our button
+positions by comparing four coordinates on the gui with the mouse location. If the mouse is clicked while over a button
+then an action occurs, otherwise nothing happens. View config uses the pygame library to create the colors needed and
+the window frames for our GUI. The Menu class displays the start-up screen of our black jack game and contains the
+buttons to begin the game and to quit the game.  Soundeffects class adds in the games sounds effects. The table class displays our game table and the cards as well our hit, stand, new game
+,new hand and quit game functions.
+
+
+
+
+CONTROL
+
+Control.blackjack_controller calculates and keeps track of the game, points, and deck. Imports in the control.dealer
+and control.player as well as the model.deck. Creates the players and dealers hands and the logic behind who wins
+that hand the hit function is also implemented here.
+
+
+Control.dealer imports control.player creates a class Dealer and takes the Player as an argument. Dealer gets hand,
+hits if its card value is under 17, shows one card and keeps the other card hidden, and gets a new hand.
+
+Control.config imports os, pygame, and platform. Sets colors to be used and creates the GUI window with given dimensions.
+Initializes simple flags for testing within the code. Creates an array of card images and custom cards from the images
+folder by pathing through the os.
+
+
+Control.player deals cards to the player, displays the card, calculates their score, gets new hands, and hits.
+
+Control.view_control acts as the driver for our game and allows the GUI to loop through all the different screens.
+
+MODEL
+
+Model.DECK folder inside model is the folder containing all the graphic images for our card deck,
+including every card of each rank, every suit for that rank, and the back of the card.
+
+Model.card imports the os. the class creates the suits and ranks uses the os to pull the deck images files from model.DECK.
+Sets face card values to their respective ranks. and creates a function for when a card is face up and when a
+card is face down.
+
+Model.deck is the python file that imports Card and random. Creates several decks based on our Cards created in model.card.
+Uses the shuffle library to shuffle our deck. Creates a function to deal cards from our deck. Creates function len
+and str to return the number of cards in our deck and a string representation of the deck.
+
+
+VIEW
+
+View.images folder holds card_images and custom_cards image files.
+
+View.sounds folder holds the sounds for when our cards are being dealt.
+
+view.init is the initializer or constuctor for our GUI.
+
+View.button imports pygame and view.config. Creates the clickable buttons for our GUI for our intro and for the game
+screen buttons as well as a boolean button function. Uses config to set the textures and colors of the buttons.
+
+
+
+view.menu displays the first screen of our game and allows the user to play the game or quit the game.
+
+
+view.soundeffects takes our soundeffects folder and creates the code to allow soundeffects to be played upon certain
+actions.
+
+view.table is where the game is displayed and uses the blackjackcontroller to play a game of blackjack and display it on
+ the GUI for the user.
+
+

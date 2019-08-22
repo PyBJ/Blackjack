@@ -10,12 +10,22 @@ class Menu:
 
     @staticmethod
     def text_objects(text, font):
+        """
+        Args:
+            text:
+            font:
+        """
         text_surface = font.render(text, True, config.black)
         return text_surface, text_surface.get_rect()
 
     # displays ace cards
     @staticmethod
     def ace_show(x, y):
+        """
+        Args:
+            x:
+            y:
+        """
         config.gameDisplay.blit(config.custom_cards[1][0], (x, y))
         config.gameDisplay.blit(config.custom_cards[0][0], (x + 100, y))
         config.gameDisplay.blit(config.custom_cards[3][0], (x + 200, y))

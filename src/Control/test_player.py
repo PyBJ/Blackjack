@@ -1,6 +1,6 @@
 import unittest
 from Model.deck import Deck
-from Control import config, control_view, player, dealer
+from Control import player
 
 
 class PlayerTest(unittest.TestCase):

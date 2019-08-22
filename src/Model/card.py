@@ -11,7 +11,12 @@ class Card:
     BACK_OF_CARD_FILE_NAME = os.path.join(THIS_FOLDER, "DECK/b.png")
 
     def __init__(self, rank, suit):
-        """Creates a card with given rank and suit"""
+        """Creates a card with given rank and suit
+
+        Args:
+            rank:
+            suit:
+        """
 
         self.rank = rank
         self.suit = suit
@@ -22,7 +27,7 @@ class Card:
         self.filename = "DECK/" + str(rank) + suit[0].lower() + ".gif"
         self.my_file = os.path.join(Card.THIS_FOLDER, self.filename)
 
-        self.faceUp = False
+        self.face_up = False
 
     def __str__(self):
         """Returns a string representation of a card"""
@@ -40,11 +45,11 @@ class Card:
 
     def get_filename(self):
         """Only lets you get the file name if the card is face up"""
-        if self.faceUp:
+        if self.face_up:
             return self.my_file
         else:
             return Card.BACK_OF_CARD_FILE_NAME
 
     def turn(self):
         """Turns the card"""
-        self.faceUp = not self.faceUp
+        self.face_up = not self.face_up

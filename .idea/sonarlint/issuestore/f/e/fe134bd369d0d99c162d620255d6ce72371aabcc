@@ -1,0 +1,6 @@
+
+lpython:S3776A"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.( Í²„
+Jpython:S1481e"-Remove the unused local variable "blackjack".(º¯ž¡ýÿÿÿÿ
+ipython:S116"SRename this field "currentDeck" to match the regular expression ^[_a-z][_a-z0-9]*$.(¤ˆÍ,
+lpython:S116"URename this field "currentPlayer" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÃÕ€š
+qpython:S116"URename this field "currentDealer" to match the regular expression ^[_a-z][_a-z0-9]*$.(áÕÞƒÿÿÿÿÿ

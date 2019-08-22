@@ -8,6 +8,10 @@ from View.button import Button
 
 class Table:
     def __init__(self, controller):
+        """
+        Args:
+            controller:
+        """
         self.control = controller
         self.loop_1 = True
         self.loop_2 = True
@@ -177,11 +181,21 @@ class Table:
 
     @staticmethod
     def text_objects(text, font):
+        """
+        Args:
+            text:
+            font:
+        """
         text_surface = font.render(text, True, config.black)
         return text_surface, text_surface.get_rect()
 
     @staticmethod
     def user_display(self, text):
+        """
+        Args:
+            self:
+            text:
+        """
         large_text = pygame.font.Font("freesansbold.ttf", 80)
         text_surf, text_rect = self.text_objects(text, large_text)
         text_rect.center = ((config.disp_width / 2), (config.disp_height / 2.5))
@@ -231,9 +245,17 @@ class Table:
         self.loop_1 = False
 
     def show_results(self, result_msg):
+        """
+        Args:
+            result_msg:
+        """
         self.user_display(self, result_msg)
 
     def show_balance(self, balance):
+        """
+        Args:
+            balance:
+        """
         mid_text = pygame.font.Font("freesansbold.ttf", 30)
         text_surf, text_rect = self.text_objects("Balance: $" + balance, mid_text)
         # text_rect.top = (0, 0)

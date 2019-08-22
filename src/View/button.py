@@ -5,8 +5,18 @@ from Control import config
 class Button:
     def __init__(self, msg, x, y, w, h, ac, ic, action=None):
         """
+        Args:
+            msg:
+            x:
+            y:
+            w:
+            h:
+            ac:
+            ic:
+            action:
 
-        :rtype: object
+        Returns:
+            object:
         """
         self.msg = msg
         self.x = x
@@ -22,6 +32,11 @@ class Button:
     # cannot modify the class state
     @staticmethod
     def text_objects(text, font):
+        """
+        Args:
+            text:
+            font:
+        """
         text_surface = font.render(text, True, config.black)
         return text_surface, text_surface.get_rect()
 

@@ -1,6 +1,11 @@
 class Player(object):
 
     def __init__(self, cards, balance):
+        """
+        Args:
+            cards:
+            balance:
+        """
         self.hand = cards
         self.balance = balance
         """Turns each card faceUp"""
@@ -14,13 +19,22 @@ class Player(object):
         return result
 
     def hit(self, card):
-        """Adds a card to the hand"""
+        """Adds a card to the hand
+
+        Args:
+            card:
+        """
         self.hand.append(card)
 
     def get_balance(self):
         return self.balance
 
     def update_balance(self, bet_amount, win):
+        """
+        Args:
+            bet_amount:
+            win:
+        """
         if win:
             self.balance = self.balance + bet_amount
         else:
@@ -45,13 +59,19 @@ class Player(object):
         return score
 
     def has_blackjack(self):
-        """Returns True if dealt cards (2) makes the score 21: Which means the player has Blackjack"""
+        """Returns True if dealt cards (2) makes the score 21: Which means the
+        player has Blackjack
+        """
         return len(self.hand) == 2 and self.get_score() == 21
 
     def get_hand(self):
         return self.hand
 
     def new_hand(self, cards):
+        """
+        Args:
+            cards:
+        """
         self.hand = cards
-        for c in self.hand:
-            c.turn()
+        for card in self.hand:
+            card.turn()

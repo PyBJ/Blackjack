@@ -1,7 +1,7 @@
 import sys
 import unittest
 import pygame
-from Control import config, control_view
+from archive import control_view
 
 
 class TestGame(unittest.TestCase):

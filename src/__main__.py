@@ -5,17 +5,25 @@ from Control import config
 from Control.blackjack_controller import BlackjackController
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__),'../../'))
-# from pycallgraph2 import PyCallGraph
-# from pycallgraph2 import Config as graph_config
-# from pycallgraph2.output import GraphvizOutput
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+from pycallgraph2 import PyCallGraph
+from pycallgraph2 import Config as graph_config
+from pycallgraph2.output import GraphvizOutput
 
-# output_config = graph_config(max_depth=7)
-# graphviz = GraphvizOutput(output_file='UML_Diagram.png')
+
+output_config = graph_config(max_depth=7)
+graphviz = GraphvizOutput(output_file='UML_Diagram.png')
 
 
 class ControlView:
-    def __init__(self):
+    def __init__(self, controller=None, new_table=None):
+        """
+        :param : rtype: Blackjack Game
+
+        Args:
+            controller (BlackjackController): Keeps track of game, points, deck
+            new_table (Table): Displays UI with controller
+        """
         self.controller = BlackjackController()
         self.new_table = Table(self.controller)
 
@@ -48,5 +56,5 @@ class ControlView:
 
 
 if __name__ == "__main__":
-    # with PyCallGraph(output=graphviz, config=output_config):
+    with PyCallGraph(output=graphviz, config=output_config):
         ControlView().meta_loop()

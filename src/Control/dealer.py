@@ -3,13 +3,22 @@ from Control.player import Player
 
 class Dealer(Player):
     def __init__(self, cards, balance):
+        """
+        Args:
+            cards:
+            balance:
+        """
         Player.__init__(self, cards, balance)
         self.show_one_card = True
         self.hand[0].turn()
 
     def hit(self, deck):
-        """Dealers strategy is to only hit if it has less than 17
-        And the rule requires the dealer to draw at least 16"""
+        """Dealers strategy is to only hit if it has less than 17 And the rule
+        requires the dealer to draw at least 16
+
+        Args:
+            deck:
+        """
         while self.get_score() < 17:
             c = deck.deal()
             c.turn()
@@ -27,4 +36,8 @@ class Dealer(Player):
             return Player.__str__(self)
 
     def new_hand(self, cards):
+        """
+        Args:
+            cards:
+        """
         self.__init__(cards, self.balance)

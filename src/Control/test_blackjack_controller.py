@@ -20,19 +20,12 @@ class BlackJackControllerTest(unittest.TestCase):
 
 
     def test_hit_dealer(self):
-        """
+        """testing that the return of hit_dealer is among these return string
+        statements
 
-        testing that the return of hit_dealer is among these return string statements
-
-
-        1 player_bust test
-        2 dealer_bust
-        3 player BLACKJACK WIN
-        4 player BLACKJACK WIN when both equal 21 but dealer is not blackjack
-        5 player  win
-        6 player  loses, dealer wins.
-        7 Dealer wins with blackjack
-        8 tie game
+        1 player_bust test 2 dealer_bust 3 player BLACKJACK WIN 4 player
+        BLACKJACK WIN when both equal 21 but dealer is not blackjack 5 player
+        win 6 player loses, dealer wins. 7 Dealer wins with blackjack 8 tie game
         """
         print("Hit_dealer Return value:", self.bjc.hit_dealer())
         print("Player Score : ", self.test_player.get_score())

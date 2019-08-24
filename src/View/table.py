@@ -26,7 +26,7 @@ class Table:
         sound = Sound()
         sound.get_sound_effect("Deal4")
 
-        config.gameDisplay.fill(config.board_color)
+        config.game_display.fill(config.board_color)
         self.show_dealers_hand()
         self.show_balance(str(self.control.get_players_balance()))
         # self.show_players_hand()
@@ -60,7 +60,7 @@ class Table:
                         "STAND", 300, 500, 100, 50, config.rose_white, config.dark_red
                     )
                     stand_button.bool_button()
-                    if stand_button.return_boolean():
+                    if stand_button.is_displayed():
                         self.stand()
                     # buttons that return a boolean for new game and quit game
                     new_game_button = Button(
@@ -73,7 +73,7 @@ class Table:
                         config.dark_red,
                     )
                     new_game_button.bool_button()
-                    if new_game_button.return_boolean():
+                    if new_game_button.is_displayed():
                         config.new_game = True
                         self.loop_1 = False
                     quit_button = Button(
@@ -86,13 +86,13 @@ class Table:
                         config.dark_red,
                     )
                     quit_button.bool_button()
-                    if quit_button.return_boolean():
+                    if quit_button.is_displayed():
                         config.game_exit = True
                         self.loop_1 = False
 
             # buttons for hit,stand,new game, and quit game
             hit_button = Button(
-                "HIT ME", 100, 500, 100, 50, config.light_gold, config.gold
+                "HIT", 100, 500, 100, 50, config.light_gold, config.gold
             )
             hit_button.intro_button()
             stand_button = Button(
@@ -120,7 +120,8 @@ class Table:
 
     # End of Hand
     def end_of_hand(self):
-        config.gameDisplay.fill(config.board_color)
+        """The players hand is over"""
+        config.game_display.fill(config.board_color)
         self.show_balance(str(self.control.get_players_balance()))
         self.show_dealers_hand()
         self.show_players_hand()
@@ -136,20 +137,20 @@ class Table:
                         "NEXT HAND", 100, 500, 150, 50, config.light_gold, config.gold
                     )
                     next_hand_button.bool_button()
-                    if next_hand_button.return_boolean():
+                    if next_hand_button.is_displayed():
                         self.loop_2 = False
                     new_game_button = Button(
                         "NEW GAME", 800, 500, 150, 50, config.light_gold, config.gold
                     )
                     new_game_button.bool_button()
-                    if new_game_button.return_boolean():
+                    if new_game_button.is_displayed():
                         config.new_game = True
                         self.loop_2 = False
                     quit_button = Button(
                         "QUIT GAME", 1000, 500, 150, 50, config.light_gold, config.gold
                     )
                     quit_button.bool_button()
-                    if quit_button.return_boolean():
+                    if quit_button.is_displayed():
                         config.game_exit = True
                         self.loop_2 = False
 
@@ -194,51 +195,61 @@ class Table:
         """
         Args:
             self:
-            text:
+            text (str):
         """
         large_text = pygame.font.Font("freesansbold.ttf", 80)
         text_surf, text_rect = self.text_objects(text, large_text)
-        text_rect.center = ((config.disp_width / 2), (config.disp_height / 2.5))
-        config.gameDisplay.blit(text_surf, text_rect)
+        text_rect.center = ((config.display_width / 2), (config.display_height / 2.5))
+        config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets
         time.sleep(1)
 
     def end_of_shoe(self):
+        """TODO: Add method description"""
+
         text = "End of Shoe, New Deck after re-deal"
         medium_text = pygame.font.Font("freesansbold.ttf", 50)
         text_surf, text_rect = self.text_objects(text, medium_text)
-        text_rect.center = ((config.disp_width / 2), (config.disp_height / 3.5))
-        config.gameDisplay.blit(text_surf, text_rect)
+        text_rect.center = ((config.display_width / 2), (config.display_height / 3.5))
+        config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets
 
     def show_dealers_hand(self):
+        """TODO: Add method description"""
+
         k = 1
         dealers_hand = self.control.get_dealers_hand()
         for i in range(len(dealers_hand)):
             right = 500
-            down = 0
+            down = 50
             card = pygame.image.load(str(dealers_hand[i].get_filename()))
-            config.gameDisplay.blit(card, (right + k, down))
+            config.game_display.blit(card, (right + k, down))
             k += 100
 
     def show_players_hand(self):
+        """TODO: Add method description"""
+
         k = 1
         players_hand = self.control.get_players_hand()
         for i in range(len(players_hand)):
             right = 500
             down = 400
             card = pygame.image.load(str(players_hand[i].get_filename()))
-            config.gameDisplay.blit(card, (right + k, down))
+            config.game_display.blit(card, (right + k, down))
             k += 100
 
     def hit(self):
+        """TODO: Add method description"""
+
         (card, score) = self.control.hit_player()
         if score >= 21:
             self.stand()
 
     def stand(self):
+        """TODO: Add method description"""
+
         self.result_msg = self.control.hit_dealer()
         self.show_dealers_hand()
         config.hand_loop = False
@@ -259,6 +270,6 @@ class Table:
         mid_text = pygame.font.Font("freesansbold.ttf", 30)
         text_surf, text_rect = self.text_objects("Balance: $" + balance, mid_text)
         # text_rect.top = (0, 0)
-        config.gameDisplay.blit(text_surf, text_rect)
+        config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # time.sleep(1)

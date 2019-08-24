@@ -3,30 +3,40 @@ from Control import config
 
 
 class Button:
-    def __init__(self, msg, x, y, w, h, ac, ic, action=None):
+    def __init__(
+        self,
+            button_label: str,
+            x_axis: int,
+            y_axis: int,
+            width: int,
+            height: int,
+            active_color,
+            inactive_color,
+            action=None,
+    ):
         """
         Args:
-            msg:
-            x:
-            y:
-            w:
-            h:
-            ac:
-            ic:
+            button_label:
+            x_axis:
+            y_axis:
+            width:
+            height:
+            active_color:
+            inactive_color:
             action:
 
         Returns:
-            object:
+            Button
         """
-        self.msg = msg
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
-        self.ac = ac
-        self.ic = ic
+        self.button_label = button_label
+        self.x_axis = x_axis
+        self.y_axis = y_axis
+        self.width = width
+        self.height = height
+        self.active_color = active_color
+        self.inactive_color = inactive_color
         self.action = action
-        self.boolean = False
+        self.button_clicked = False
 
     # a static method is a method bound to the class not the object of the class
     # cannot modify the class state
@@ -44,62 +54,92 @@ class Button:
     def intro_button(self):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
-        if self.x + self.w > mouse[0] > self.x and self.y + self.h > mouse[1] > self.y:
+        if (
+            self.x_axis + self.width > mouse[0] > self.x_axis
+            and self.y_axis + self.height > mouse[1] > self.y_axis
+        ):
             pygame.draw.rect(
-                config.gameDisplay, self.ac, (self.x, self.y, self.w, self.h)
+                config.game_display,
+                self.active_color,
+                (self.x_axis, self.y_axis, self.width, self.height),
             )
             if click[0] == 1 and self.action:
                 # POSSIBLE TEST CASE HERE
                 self.action()
         else:
             pygame.draw.rect(
-                config.gameDisplay, self.ic, (self.x, self.y, self.w, self.h)
+                config.game_display,
+                self.inactive_color,
+                (self.x_axis, self.y_axis, self.width, self.height),
             )
         small_text = pygame.font.Font("freesansbold.ttf", 20)
-        text_surf, text_rect = self.text_objects(self.msg, small_text)
-        #                     center of x     center of y
-        text_rect.center = ((self.x + (self.w / 2)), (self.y + (self.h / 2)))
-        config.gameDisplay.blit(text_surf, text_rect)
+        text_surf, text_rect = self.text_objects(self.button_label, small_text)
+        #                     center of x_axis     center of y_axis
+        text_rect.center = (
+            (self.x_axis + (self.width / 2)),
+            (self.y_axis + (self.height / 2)),
+        )
+        config.game_display.blit(text_surf, text_rect)
 
     # hit,stand, quit, new game
     def game_button(self):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
-        if self.x + self.w > mouse[0] > self.x and self.y + self.h > mouse[1] > self.y:
+        if (
+            self.x_axis + self.width > mouse[0] > self.x_axis
+            and self.y_axis + self.height > mouse[1] > self.y_axis
+        ):
             pygame.draw.ellipse(
-                config.gameDisplay, self.ac, (self.x, self.y, self.w, self.h)
+                config.game_display,
+                self.active_color,
+                (self.x_axis, self.y_axis, self.width, self.height),
             )
             if click[0] == 1 and self.action:
                 self.action()
         else:
             pygame.draw.ellipse(
-                config.gameDisplay, self.ic, (self.x, self.y, self.w, self.h)
+                config.game_display,
+                self.inactive_color,
+                (self.x_axis, self.y_axis, self.width, self.height),
             )
         button_text = pygame.font.SysFont("comicsans", 20)
-        text_surf, text_ellip = self.text_objects(self.msg, button_text)
-        text_ellip.center = ((self.x + (self.w / 2)), (self.y + (self.h / 2)))
-        config.gameDisplay.blit(text_surf, text_ellip)
+        text_surf, text_ellip = self.text_objects(self.button_label, button_text)
+        text_ellip.center = (
+            (self.x_axis + (self.width / 2)),
+            (self.y_axis + (self.height / 2)),
+        )
+        config.game_display.blit(text_surf, text_ellip)
 
     # button functionality with message, coordinates, width/height, active/inactive color
     def bool_button(self):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
-        if self.x + self.w > mouse[0] > self.x and self.y + self.h > mouse[1] > self.y:
+        if (
+            self.x_axis + self.width > mouse[0] > self.x_axis
+            and self.y_axis + self.height > mouse[1] > self.y_axis
+        ):
             pygame.draw.rect(
-                config.gameDisplay, self.ac, (self.x, self.y, self.w, self.h)
+                config.game_display,
+                self.active_color,
+                (self.x_axis, self.y_axis, self.width, self.height),
             )
             if click[0] == 1:
                 # POSSIBLE TEST CASE HERE
-                self.boolean = True
+                self.button_clicked = True
         else:
             pygame.draw.rect(
-                config.gameDisplay, self.ic, (self.x, self.y, self.w, self.h)
+                config.game_display,
+                self.inactive_color,
+                (self.x_axis, self.y_axis, self.width, self.height),
             )
         small_text = pygame.font.Font("freesansbold.ttf", 20)
-        text_surf, text_rect = self.text_objects(self.msg, small_text)
-        #                     center of x     center of y
-        text_rect.center = ((self.x + (self.w / 2)), (self.y + (self.h / 2)))
-        config.gameDisplay.blit(text_surf, text_rect)
+        text_surf, text_rect = self.text_objects(self.button_label, small_text)
+        #                     center of x_axis     center of y_axis
+        text_rect.center = (
+            (self.x_axis + (self.width / 2)),
+            (self.y_axis + (self.height / 2)),
+        )
+        config.game_display.blit(text_surf, text_rect)
 
-    def return_boolean(self):
-        return self.boolean
+    def is_displayed(self) -> bool:
+        return self.button_clicked

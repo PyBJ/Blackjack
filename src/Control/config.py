@@ -6,13 +6,13 @@ import pygame
 #  File Configurations including Globals
 
 # game control/testing
-new_game = False
-game_exit = False
-menu = False
-end_shoe = False
-end_shoe_warn = False
-crashed = False
-blackjack = False
+new_game: bool = False
+game_exit: bool = False
+menu: bool = False
+end_shoe: bool = False
+end_shoe_warn: bool = False
+crashed: bool = False
+blackjack: bool = False
 # colors
 # board_color = (255, 60, 90)
 board_color = (23, 79, 7)
@@ -30,14 +30,14 @@ gold = (201, 173, 24)
 light_gold = (237, 214, 97)
 
 # display dimensions
-disp_width = 1200
-disp_height = 600
+display_width = 1200
+display_height = 600
 
 # pygame constructors
 pygame.init()
 small_text = pygame.font.Font("freesansbold.ttf", 20)
-gameDisplay = pygame.display.set_mode((disp_width, disp_height))
-pygame.display.set_caption("BlackJackTrainerAlfa")
+game_display = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption("BlackJack")
 clock = pygame.time.Clock()
 
 

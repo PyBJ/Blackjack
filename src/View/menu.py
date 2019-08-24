@@ -5,6 +5,25 @@ from View.button import Button
 
 class Menu:
     def __init__(self):
+        """Menu class
+
+            TODO: Add description
+
+            Args:
+
+            Attributes:
+                game_loop : bool
+                    TODO: Add description
+                quit_game : bool
+                    TODO: Add description
+
+            Returns:
+                The Menu
+                TODO: Figure out this class
+
+            Raises:
+                KeyError: EXAMPLE!!! REPLACE
+        """
         self.game_loop = False
         self.quit_game = False
 
@@ -26,10 +45,10 @@ class Menu:
             x:
             y:
         """
-        config.gameDisplay.blit(config.custom_cards[1][0], (x, y))
-        config.gameDisplay.blit(config.custom_cards[0][0], (x + 100, y))
-        config.gameDisplay.blit(config.custom_cards[3][0], (x + 200, y))
-        config.gameDisplay.blit(config.custom_cards[2][0], (x + 300, y))
+        config.game_display.blit(config.custom_cards[1][0], (x, y))
+        config.game_display.blit(config.custom_cards[0][0], (x + 100, y))
+        config.game_display.blit(config.custom_cards[3][0], (x + 200, y))
+        config.game_display.blit(config.custom_cards[2][0], (x + 300, y))
 
     # game_menu now returns a boolean value 0 for main game_loop or 1 for quit game
     def game_menu(self):
@@ -38,25 +57,25 @@ class Menu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-            config.gameDisplay.fill(config.board_color)
+            config.game_display.fill(config.board_color)
             large_text = pygame.font.Font("freesansbold.ttf", 100)
             text_surf, text_rect = self.text_objects("BlackJack", large_text)
-            text_rect.center = ((config.disp_width / 2), (config.disp_height / 2.2))
-            config.gameDisplay.blit(text_surf, text_rect)
+            text_rect.center = ((config.display_width / 2), (config.display_height / 2.2))
+            config.game_display.blit(text_surf, text_rect)
 
             play_button = Button(
                 "PLAY", 550, 350, 100, 50, config.rose_white, config.dark_red)
 
             play_button.bool_button()
-            self.game_loop = play_button.return_boolean()
+            self.game_loop = play_button.is_displayed()
 
             quit_button = Button(
                 "QUIT", 550, 425, 100, 50, config.rose_white, config.dark_red
             )
             quit_button.bool_button()
-            self.quit_game = quit_button.return_boolean()
+            self.quit_game = quit_button.is_displayed()
 
-            self.ace_show((config.disp_width / 2.9), 40)
+            self.ace_show((config.display_width / 2.9), 40)
             pygame.display.update()
             config.clock.tick(15)
 

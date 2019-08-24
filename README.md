@@ -1,5 +1,4 @@
-# cs4398-project
-CS Project Class Application
+# Python Blackjack Game
 
 To run application go to linux terminal.
 cd into /Blackjack-Project folder

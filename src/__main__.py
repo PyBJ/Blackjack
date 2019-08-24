@@ -5,6 +5,8 @@ from Control import config
 from Control.blackjack_controller import BlackjackController
 import os
 import sys
+import logging
+logger = logging.getLogger("ControlView")
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 # from pycallgraph2 import PyCallGraph
@@ -46,6 +48,7 @@ class ControlView:
         config.game_exit = Menu().game_menu()
         while not config.game_exit:
             self.new_table.player_hand_loop()
+            logger.info("Something happens")
             if config.new_game:
                 self.controller = BlackjackController()
                 self.new_table = Table(self.controller)
@@ -66,4 +69,8 @@ class ControlView:
 
 if __name__ == "__main__":
     # with PyCallGraph(output=graphviz, config=output_config):
+    import logging.config
+
+    LOG_FILENAME = "blackjack.log"
+    logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
     ControlView().meta_loop()

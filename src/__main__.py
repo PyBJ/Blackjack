@@ -6,6 +6,8 @@ from Control.blackjack_controller import BlackjackController
 import os
 import sys
 import logging
+
+
 logger = logging.getLogger("ControlView")
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
@@ -47,7 +49,7 @@ class ControlView:
         config.game_exit = Menu().game_menu()
         while not config.game_exit:
             self.new_table.player_hand_loop()
-            logger.info("Something happens")
+            logger.info("Something happens")  # Happens after pressing "NEW GAME"
             if config.new_game:
                 self.controller = BlackjackController()
                 self.new_table = Table(self.controller)
@@ -71,5 +73,7 @@ if __name__ == "__main__":
     import logging.config
 
     LOG_FILENAME = "blackjack.log"
-    logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
+    # logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.getLogger().addHandler(logging.StreamHandler())
     ControlView().meta_loop()

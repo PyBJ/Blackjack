@@ -13,7 +13,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 # from pycallgraph2 import Config as graph_config
 # from pycallgraph2.output import GraphvizOutput
 #
-#
 # output_config = graph_config(max_depth=7)
 # graphviz = GraphvizOutput(output_file="UML_Diagram22.png")
 

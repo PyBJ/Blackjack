@@ -1,6 +1,9 @@
 import pygame
 from Control import config
 from View.button import Button
+import logging
+
+logger = logging.getLogger("menu")
 
 
 class Menu:
@@ -53,6 +56,7 @@ class Menu:
     # game_menu now returns a boolean value 0 for main game_loop or 1 for quit game
     def game_menu(self):
         config.menu = True
+        logger.info("Game menu generated in Menu class with game_menu function")
         while config.menu and not self.game_loop and not self.quit_game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -60,11 +64,15 @@ class Menu:
             config.game_display.fill(config.board_color)
             large_text = pygame.font.Font("freesansbold.ttf", 100)
             text_surf, text_rect = self.text_objects("BlackJack", large_text)
-            text_rect.center = ((config.display_width / 2), (config.display_height / 2.2))
+            text_rect.center = (
+                (config.display_width / 2),
+                (config.display_height / 2.2),
+            )
             config.game_display.blit(text_surf, text_rect)
 
             play_button = Button(
-                "PLAY", 550, 350, 100, 50, config.rose_white, config.dark_red)
+                "PLAY", 550, 350, 100, 50, config.rose_white, config.dark_red
+            )
 
             play_button.bool_button()
             self.game_loop = play_button.is_displayed()
@@ -85,3 +93,5 @@ class Menu:
             return 1
         else:
             print("ERROR IN MENU CLASS")
+
+

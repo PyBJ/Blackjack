@@ -7,3 +7,10 @@ INFO:ControlView:Something happens
 2019-08-25 18:40:26,068 - INFO - Something happens
 2019-08-25 18:40:29,286 - INFO - Something happens
 2019-08-25 18:40:29,829 - INFO - Something happens
+2019-08-25 18:53:36,355 - INFO - Menu is displayed
+2019-08-25 18:55:50,678 - INFO - Menu is displayed
+2019-08-25 19:12:02,831 - INFO - Run through ControlView meta_loop
+2019-08-25 19:13:02,063 - INFO - Run through ControlView meta_loop
+2019-08-25 19:13:02,063 - INFO - Game menu generated in Menu class with game_menu function
+2019-08-25 19:14:55,287 - INFO - Run through ControlView meta_loop
+2019-08-25 19:14:55,287 - INFO - Game menu generated in Menu class with game_menu function

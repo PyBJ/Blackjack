@@ -8,16 +8,16 @@ import sys
 import logging
 
 
-logger = logging.getLogger("ControlView")
+logger = logging.getLogger("__main__")
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 
-from pycallgraph2 import PyCallGraph
-from pycallgraph2 import Config as graph_config
-from pycallgraph2.output import GraphvizOutput
-
-output_config = graph_config(max_depth=7)
-graphviz = GraphvizOutput(output_file="UML_Diagram22.png")
+# from pycallgraph2 import PyCallGraph
+# from pycallgraph2 import Config as graph_config
+# from pycallgraph2.output import GraphvizOutput
+#
+# output_config = graph_config(max_depth=7)
+# graphviz = GraphvizOutput(output_file="UML_Diagram22.png")
 
 
 class ControlView:
@@ -47,10 +47,10 @@ class ControlView:
     # passes two objects that tell menu buttons where to go
     def meta_loop(self):
         """Outer game-control loop, controls exit and new_game."""
+        logger.info("Run through ControlView meta_loop")
         config.game_exit = Menu().game_menu()
         while not config.game_exit:
             self.new_table.player_hand_loop()
-            logger.info("Something happens")  # Happens after pressing "NEW GAME"
             if config.new_game:
                 self.controller = BlackjackController()
                 self.new_table = Table(self.controller)
@@ -70,11 +70,11 @@ class ControlView:
 
 
 if __name__ == "__main__":
-    with PyCallGraph(output=graphviz, config=output_config):
-        import logging.config
+    #with PyCallGraph(output=graphviz, config=output_config):
+    import logging.config
 
-        LOG_FILENAME = "blackjack.log"
-        # logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-        logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-        logging.getLogger().addHandler(logging.StreamHandler())
-        ControlView().meta_loop()
+    LOG_FILENAME = "blackjack.log"
+    # logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.getLogger().addHandler(logging.StreamHandler())
+    ControlView().meta_loop()

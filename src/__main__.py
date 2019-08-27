@@ -10,6 +10,7 @@ import logging
 
 logger = logging.getLogger("__main__")
 
+
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 
 # from pycallgraph2 import PyCallGraph
@@ -70,11 +71,15 @@ class ControlView:
 
 
 if __name__ == "__main__":
-    #with PyCallGraph(output=graphviz, config=output_config):
+    # with PyCallGraph(output=graphviz, config=output_config):
     import logging.config
 
     LOG_FILENAME = "blackjack.log"
     # logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-    logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.basicConfig(
+        filename=LOG_FILENAME,
+        level=logging.DEBUG,
+        format="%(asctime)s - %(levelname)s - %(message)s (%(filename)s : %(lineno)d)",
+    )
     logging.getLogger().addHandler(logging.StreamHandler())
     ControlView().meta_loop()

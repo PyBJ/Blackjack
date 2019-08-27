@@ -14,3 +14,13 @@ INFO:ControlView:Something happens
 2019-08-25 19:13:02,063 - INFO - Game menu generated in Menu class with game_menu function
 2019-08-25 19:14:55,287 - INFO - Run through ControlView meta_loop
 2019-08-25 19:14:55,287 - INFO - Game menu generated in Menu class with game_menu function
+2019-08-25 19:25:48,664 - INFO - Run through ControlView meta_loop (__main__.py:50)
+2019-08-25 19:25:48,664 - INFO - Game menu generated in Menu class with game_menu function (menu.py:59)
+2019-08-25 20:01:48,665 - INFO - Run through ControlView meta_loop (__main__.py : 50)
+2019-08-25 20:01:48,665 - INFO - Game menu generated in Menu class with game_menu function (menu.py : 59)
+2019-08-25 20:05:34,195 - INFO - Run through ControlView meta_loop (__main__.py : 50)
+2019-08-25 20:05:34,195 - INFO - Game menu generated in Menu class with game_menu function (menu.py : 59)
+2019-08-25 20:12:41,561 - INFO - Run through ControlView meta_loop (__main__.py : 50)
+2019-08-25 20:12:41,561 - INFO - Game menu generated in Menu class with game_menu function (menu.py : 59)
+2019-08-26 04:03:44,195 - INFO - Run through ControlView meta_loop (__main__.py : 51)
+2019-08-26 04:03:44,216 - INFO - Game menu generated in Menu class with game_menu function (menu.py : 59)

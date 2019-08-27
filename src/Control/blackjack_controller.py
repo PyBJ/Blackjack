@@ -5,9 +5,18 @@ from Control.player import Player
 
 
 class BlackjackController(object):
-    """Calculates and keeps track of the game, points, dec"""
-
     def __init__(self):
+        """Calculates and keeps track of the game, points, dec
+
+        Args:
+            TODO:
+
+        Returns:
+            TODO:
+
+        Raises:
+            TODO:
+        """
         self.current_deck = Deck()
         self.current_deck.shuffle()
         self.bet_amount = 100

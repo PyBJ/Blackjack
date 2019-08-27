@@ -16,13 +16,13 @@ class Button:
     ):
         """
         Args:
-            button_label:
-            x_axis:
-            y_axis:
-            width:
-            height:
-            active_color:
-            inactive_color:
+            button_label (str): Description
+            x_axis (int): Description
+            y_axis (int): Description
+            width (int): Description
+            height (int): Description
+            active_color: Description
+            inactive_color: Description
             action:
 
         Returns:

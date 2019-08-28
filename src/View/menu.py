@@ -56,7 +56,7 @@ class Menu:
     # game_menu now returns a boolean value 0 for main game_loop or 1 for quit game
     def game_menu(self):
         config.menu = True
-        logger.info("Game menu generated in Menu class with game_menu function")
+        logger.debug("Game menu generated in Menu class with game_menu function")
         while config.menu and not self.game_loop and not self.quit_game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

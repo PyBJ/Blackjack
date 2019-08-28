@@ -48,9 +48,12 @@ class ControlView:
     # passes two objects that tell menu buttons where to go
     def meta_loop(self):
         """Outer game-control loop, controls exit and new_game."""
-        logger.info("Run through ControlView meta_loop")
+        logger.debug("Run through ControlView meta_loop")
         config.game_exit = Menu().game_menu()
         while not config.game_exit:
+            logger.debug("While config game_exit bool is FALSE: run table player_hand_loop() method")
+            #  A player_hand_loop() is really a game loop? The debug message occurs
+            #  Each time a new hand is initiated.
             self.new_table.player_hand_loop()
             if config.new_game:
                 self.controller = BlackjackController()

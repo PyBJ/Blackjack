@@ -268,8 +268,12 @@ class Table:
             balance:
         """
         mid_text = pygame.font.Font("freesansbold.ttf", 30)
-        text_surf, text_rect = self.text_objects("Balance: $" + balance, mid_text)
+        text_surf, text_rect = self.text_objects("Balance: " + balance, mid_text)
         # text_rect.top = (0, 0)
+
+        text_rect.right = 320
+        text_rect.bottom = 80
+
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # time.sleep(1)

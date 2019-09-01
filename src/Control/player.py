@@ -9,8 +9,8 @@ class Player(object):
         self.hand = cards
         self.balance = balance
         """Turns each card faceUp"""
-        for c in self.hand:
-            c.turn()
+        for card in self.hand:
+            card.turn()
 
     def __str__(self):
         """Returns string rep of cards and points."""
@@ -40,7 +40,7 @@ class Player(object):
         else:
             self.balance = self.balance - bet_amount
 
-    def get_score(self):
+    def get_score(self) -> int:
         score = 0
         for card in self.hand:
             if card.rank > 9:

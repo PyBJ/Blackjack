@@ -3,7 +3,7 @@ from Control import config
 from View.button import Button
 import logging
 
-logger = logging.getLogger("menu")
+logger = logging.getLogger("menu.py")
 
 
 class Menu:

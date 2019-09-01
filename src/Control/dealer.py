@@ -20,9 +20,9 @@ class Dealer(Player):
             deck:
         """
         while self.get_score() < 17:
-            c = deck.deal()
-            c.turn()
-            self.hand.append(c)
+            card = deck.deal()
+            card.turn()
+            self.hand.append(card)
 
     def show_first_card(self):
         self.show_one_card = False

@@ -36,7 +36,10 @@ class ControlView:
         Raises:
             KeyError: EXAMPLE!!! REPLACE
         """
+        logger.debug("Create BlackjackController in ControlView")
         self.controller = BlackjackController()
+
+        logger.debug("Create Table: new_table in ControlView")
         self.new_table = Table(self.controller)
 
     @staticmethod

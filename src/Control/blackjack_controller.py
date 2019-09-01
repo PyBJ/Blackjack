@@ -2,6 +2,9 @@ from Control import config
 from Model.deck import Deck
 from Control.dealer import Dealer
 from Control.player import Player
+import logging
+
+logger = logging.getLogger("blackjack_controller.py")
 
 
 class BlackjackController(object):
@@ -17,25 +20,34 @@ class BlackjackController(object):
         Raises:
             TODO:
         """
+        logger.debug("[Deck: current_deck] initialized in BlackjackController")
         self.current_deck = Deck()
+
+        logger.debug("[Deck: current_deck] shuffled in BlackjackController")
         self.current_deck.shuffle()
+
+        logger.debug("[Int: bet_amount] initialized in BlackjackController")
         self.bet_amount = 100
+
+        logger.debug("[Bool: win] initialized to False in BlackjackController")
         self.win = False
+
+        logger.debug("[Int: default_balance] initialized to 10000 in BlackjackController")
         self.default_balance = 10000
+
+        logger.debug("[Bool: starting_blackjack] initialized in BlackjackController")
         self.starting_blackjack = False
 
-        """Deal player and dealer 2 cards each"""
+        logger.debug("[Player: current_player] initialized in BlackjackController, cards dealt & balance")
         self.current_player = Player([self.current_deck.deal(), self.current_deck.deal()], self.default_balance)
+
+        logger.debug("[Dealer: current_dealer] initialized in BlackjackController, cards dealt & balance")
         self.current_dealer = Dealer([self.current_deck.deal(), self.current_deck.deal()], self.default_balance)
         
         if self.current_player.has_blackjack():
             self.win = True
             self.current_player.update_balance(self.bet_amount, self.win)
             self.starting_blackjack = True
-        # Fif self.current_player.has_blackjack:
-        #     self.win = True
-        #     self.current_player.update_balance(self.bet_amount, self.win)
-        #     self.player_wins()
 
     def get_players_balance(self):
         return self.current_player.get_balance()

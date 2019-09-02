@@ -1,14 +1,14 @@
-from Control.player import Player
+from Control.player import BlackjackPlayer
 
 
-class Dealer(Player):
+class Dealer(BlackjackPlayer):
     def __init__(self, cards, balance):
         """
         Args:
             cards:
             balance:
         """
-        Player.__init__(self, cards, balance)
+        BlackjackPlayer.__init__(self, cards, balance)
         self.show_one_card = True
         self.hand[0].turn()
 
@@ -33,7 +33,7 @@ class Dealer(Player):
         if self.show_one_card:
             return str(self.hand[0])
         else:
-            return Player.__str__(self)
+            return BlackjackPlayer.__str__(self)
 
     def new_hand(self, cards):
         """

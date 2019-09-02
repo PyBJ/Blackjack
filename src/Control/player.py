@@ -1,4 +1,8 @@
-class Player(object):
+class Player:
+    pass
+
+
+class BlackjackPlayer(Player):
 
     def __init__(self, cards, balance):
         """

@@ -1,5 +1,17 @@
 # Python Blackjack Game
 
+## TODO:
+1. Refactor so that ControllerTick(): # Handle input events, ViewTick(): # Draw everything
+       - https://www.pygame.org/wiki/tut_design
+          
+2. Balance needs to be subtracted whenever the hand begins, then
+   if the player loses, nothing happens. If they win, they get ante + winnings
+   
+## Note:
+test.txt contains specific packages used to test the project
+dev.txt contains packages used during the development process
+prod.txt contains packages for production environment?
+
 To run application go to linux terminal.
 cd into /Blackjack-Project folder
 

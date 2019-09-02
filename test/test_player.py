@@ -10,7 +10,7 @@ class PlayerTest(unittest.TestCase):
         self.deck.shuffle()
         self.default_balance = 10000
         self.test_suit_list = ['Diamonds', 'Spades', 'Hearts', 'Clubs']
-        self.test_player = player.Player([self.deck.deal(), self.deck.deal()], self.default_balance)
+        self.test_player = player.BlackjackPlayer([self.deck.deal(), self.deck.deal()], self.default_balance)
 
     def test_player_hand_size(self):
         self.assertEqual(len(self.test_player.get_hand()), 2)

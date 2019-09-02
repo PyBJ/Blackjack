@@ -1,7 +1,7 @@
 from Control import config
 from Model.deck import Deck
 from Control.dealer import Dealer
-from Control.player import Player
+from Control.player import BlackjackPlayer
 import logging
 
 logger = logging.getLogger("blackjack_controller.py")
@@ -39,15 +39,18 @@ class BlackjackController(object):
         self.starting_blackjack = False
 
         logger.debug("[Player: current_player] initialized in BlackjackController, cards dealt & balance")
-        self.current_player = Player([self.current_deck.deal(), self.current_deck.deal()], self.default_balance)
+        self.current_player = BlackjackPlayer([self.current_deck.deal(), self.current_deck.deal()], self.default_balance)
 
         logger.debug("[Dealer: current_dealer] initialized in BlackjackController, cards dealt & balance")
         self.current_dealer = Dealer([self.current_deck.deal(), self.current_deck.deal()], self.default_balance)
-        
+
+        logger.debug("In BlackjackController.__init__, check if current_player has_blackjack()")
         if self.current_player.has_blackjack():
+            logger.info("Player has Blackjack")
             self.win = True
             self.current_player.update_balance(self.bet_amount, self.win)
             self.starting_blackjack = True
+        logger.info("Player Doesn't have Blackjack")
 
     def get_players_balance(self):
         return self.current_player.get_balance()

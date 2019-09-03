@@ -4,14 +4,32 @@ import random
 
 class Deck(object):
     def __init__(self):
-        """Creates a 4 Deck Shoe. suits * rank = 52"""
+        """Creates a 4 Deck Shoe. suits * rank = 52
+
+            TODO: Add long description
+
+            Args:
+
+            Attributes:
+                game_loop : bool
+                    TODO: Add description
+                quit_game : bool
+                    TODO: Add description
+
+            Returns:
+                A six deck shoe
+                TODO: Figure out this class
+
+            Raises:
+                KeyError: EXAMPLE!!! REPLACE
+        """
         self.deck = []
         decks = 6
         while decks > 0:
             for suit in Card.SUITS:
                 for rank in Card.RANKS:
-                    c = Card(rank, suit)
-                    self.deck.append(c)
+                    card = Card(rank, suit)
+                    self.deck.append(card)
             decks = decks - 1
         # value representing a random card cut for the shoe
         # the lower number representing end of deck
@@ -22,6 +40,7 @@ class Deck(object):
         random.shuffle(self.deck)
 
     def deal(self):
+        """Return a card from the Deck"""
         self.deck_size = self.deck_size - 1
         print(self.deck_size)
         return self.deck.pop(0)

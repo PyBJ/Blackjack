@@ -62,28 +62,28 @@ class Menu:
                 if event.type == pygame.QUIT:
                     pygame.quit()
             config.game_display.fill(config.board_color)
-            large_text = pygame.font.Font("freesansbold.ttf", 100)
+            large_text = pygame.font.Font("freesansbold.ttf", 80)
             text_surf, text_rect = self.text_objects("BlackJack", large_text)
             text_rect.center = (
                 (config.display_width / 2),
-                (config.display_height / 2.2),
+                (config.display_height / 2.9),
             )
             config.game_display.blit(text_surf, text_rect)
 
             play_button = Button(
-                "PLAY", 550, 350, 100, 50, config.rose_white, config.dark_red
+                "PLAY", 400, 350, 100, 50, config.rose_white, config.dark_red
             )
 
             play_button.bool_button()
             self.game_loop = play_button.is_displayed()
 
             quit_button = Button(
-                "QUIT", 550, 425, 100, 50, config.rose_white, config.dark_red
+                "QUIT", 400, 425, 100, 50, config.rose_white, config.dark_red
             )
             quit_button.bool_button()
             self.quit_game = quit_button.is_displayed()
 
-            self.ace_show((config.display_width / 2.9), 40)
+            self.ace_show(((config.display_width / 2) - 200), 20)
             pygame.display.update()
             config.clock.tick(15)
 

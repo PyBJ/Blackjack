@@ -47,17 +47,17 @@ class Table:
                     # buttons for hit and stand
                     hit_button = Button(
                         "HIT",
-                        100,
-                        500,
-                        100,
                         50,
+                        500,
+                        60,
+                        30,
                         config.rose_white,
                         config.dark_red,
                         self.hit,
                     )
                     hit_button.intro_button()
                     stand_button = Button(
-                        "STAND", 300, 500, 100, 50, config.rose_white, config.dark_red
+                        "STAND", 200, 500, 60, 30, config.rose_white, config.dark_red
                     )
                     stand_button.bool_button()
                     if stand_button.is_displayed():
@@ -65,9 +65,9 @@ class Table:
                     # buttons that return a boolean for new game and quit game
                     new_game_button = Button(
                         "NEW GAME",
-                        800,
+                        600,
                         500,
-                        150,
+                        100,
                         50,
                         config.rose_white,
                         config.dark_red,
@@ -78,10 +78,10 @@ class Table:
                         self.loop_1 = False
                     quit_button = Button(
                         "QUIT GAME",
-                        1000,
+                        800,
                         500,
-                        150,
-                        50,
+                        80,
+                        40,
                         config.rose_white,
                         config.dark_red,
                     )
@@ -92,19 +92,19 @@ class Table:
 
             # buttons for hit,stand,new game, and quit game
             hit_button = Button(
-                "HIT", 100, 500, 100, 50, config.light_gold, config.gold
+                "HIT", 50, 500, 60, 30, config.light_gold, config.gold
             )
             hit_button.intro_button()
             stand_button = Button(
-                "STAND", 300, 500, 100, 50, config.light_gold, config.gold
+                "STAND", 200, 500, 60, 30, config.light_gold, config.gold
             )
             stand_button.intro_button()
             new_game_button = Button(
-                "NEW GAME", 800, 500, 150, 50, config.light_gold, config.gold
+                "NEW GAME", 600, 500, 80, 40, config.light_gold, config.gold
             )
             new_game_button.intro_button()
             quit_button = Button(
-                "QUIT GAME", 1000, 500, 150, 50, config.light_gold, config.gold
+                "QUIT GAME", 800, 500, 80, 40, config.light_gold, config.gold
             )
             quit_button.intro_button()
 
@@ -134,20 +134,20 @@ class Table:
                     quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     next_hand_button = Button(
-                        "NEXT HAND", 100, 500, 150, 50, config.light_gold, config.gold
+                        "NEXT HAND", 100, 500, 80, 40, config.light_gold, config.gold
                     )
                     next_hand_button.bool_button()
                     if next_hand_button.is_displayed():
                         self.loop_2 = False
                     new_game_button = Button(
-                        "NEW GAME", 800, 500, 150, 50, config.light_gold, config.gold
+                        "NEW GAME", 600, 500, 80, 40, config.light_gold, config.gold
                     )
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
                         self.loop_2 = False
                     quit_button = Button(
-                        "QUIT GAME", 1000, 500, 150, 50, config.light_gold, config.gold
+                        "QUIT GAME", 800, 500, 80, 40, config.light_gold, config.gold
                     )
                     quit_button.bool_button()
                     if quit_button.is_displayed():
@@ -164,15 +164,15 @@ class Table:
             )
             stand_button.intro_button()
             next_hand_button = Button(
-                "NEXT HAND", 100, 500, 150, 50, config.light_gold, config.gold
+                "NEXT HAND", 100, 500, 80, 40, config.light_gold, config.gold
             )
             next_hand_button.bool_button()
             next_hand_button = Button(
-                "NEW GAME", 800, 500, 150, 50, config.light_gold, config.gold
+                "NEW GAME", 600, 500, 80, 40, config.light_gold, config.gold
             )
             next_hand_button.intro_button()
             new_game_button = Button(
-                "QUIT GAME", 1000, 500, 150, 50, config.light_gold, config.gold
+                "QUIT GAME", 800, 500, 80, 40, config.light_gold, config.gold
             )
             new_game_button.intro_button()
             pygame.display.update()
@@ -222,7 +222,7 @@ class Table:
         k = 1
         dealers_hand = self.control.get_dealers_hand()
         for i in range(len(dealers_hand)):
-            right = 500
+            right = 350
             down = 50
             card = pygame.image.load(str(dealers_hand[i].get_filename()))
             config.game_display.blit(card, (right + k, down))
@@ -234,7 +234,7 @@ class Table:
         k = 1
         players_hand = self.control.get_players_hand()
         for i in range(len(players_hand)):
-            right = 500
+            right = 350
             down = 400
             card = pygame.image.load(str(players_hand[i].get_filename()))
             config.game_display.blit(card, (right + k, down))

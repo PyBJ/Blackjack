@@ -72,7 +72,7 @@ class Button:
                 self.inactive_color,
                 (self.x_axis, self.y_axis, self.width, self.height),
             )
-        small_text = pygame.font.Font("freesansbold.ttf", 20)
+        small_text = pygame.font.Font("freesansbold.ttf", 10)
         text_surf, text_rect = self.text_objects(self.button_label, small_text)
         #                     center of x_axis     center of y_axis
         text_rect.center = (
@@ -102,7 +102,7 @@ class Button:
                 self.inactive_color,
                 (self.x_axis, self.y_axis, self.width, self.height),
             )
-        button_text = pygame.font.SysFont("comicsans", 20)
+        button_text = pygame.font.SysFont("comicsans", 10)
         text_surf, text_ellip = self.text_objects(self.button_label, button_text)
         text_ellip.center = (
             (self.x_axis + (self.width / 2)),
@@ -132,7 +132,7 @@ class Button:
                 self.inactive_color,
                 (self.x_axis, self.y_axis, self.width, self.height),
             )
-        small_text = pygame.font.Font("freesansbold.ttf", 20)
+        small_text = pygame.font.Font("freesansbold.ttf", 10)
         text_surf, text_rect = self.text_objects(self.button_label, small_text)
         #                     center of x_axis     center of y_axis
         text_rect.center = (

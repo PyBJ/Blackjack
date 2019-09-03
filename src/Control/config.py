@@ -30,7 +30,7 @@ gold = (201, 173, 24)
 light_gold = (237, 214, 97)
 
 # display dimensions
-display_width = 1200
+display_width = 900
 display_height = 600
 
 # pygame constructors

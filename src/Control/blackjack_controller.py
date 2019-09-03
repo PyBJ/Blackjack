@@ -122,7 +122,6 @@ class BlackjackController(object):
                 ):
                     self.win = True
                     self.current_player.update_balance(self.bet_amount, self.win)
-                    blackjack = True
                     return "BlackJack! You Win!"
                 elif (
                     not self.current_player.has_blackjack()

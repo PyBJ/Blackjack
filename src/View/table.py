@@ -6,6 +6,18 @@ from View.soundeffects import Sound
 from View.button import Button
 
 
+class DecisionButtons:
+    y_axis = 550
+    hit_x_axis = 40
+    stand_x_axis = 120
+    split_x_axis = 200
+    double_down_x_axis = 280
+    insurance_x_axis = 360
+    surrender_x_axis = 440
+    decision_button_width = 60
+    decision_button_height = 30
+
+
 class Table:
     def __init__(self, controller):
         """
@@ -47,34 +59,40 @@ class Table:
                     # buttons for hit and stand
                     hit_button = Button(
                         "HIT",
-                        50,
-                        500,
-                        60,
-                        30,
+                        DecisionButtons.hit_x_axis,
+                        DecisionButtons.y_axis,
+                        DecisionButtons.decision_button_width,
+                        DecisionButtons.decision_button_height,
                         config.rose_white,
                         config.dark_red,
                         self.hit,
                     )
                     hit_button.intro_button()
                     stand_button = Button(
-                        "STAND", 150, 500, 60, 30, config.rose_white, config.dark_red
+                        "STAND",
+                        150,
+                        DecisionButtons.y_axis,
+                        DecisionButtons.decision_button_width,
+                        DecisionButtons.decision_button_height,
+                        config.rose_white,
+                        config.dark_red,
                     )
                     stand_button.bool_button()
                     split_button = Button(
-                        "SPLIT", 250, 500, 60, 30, config.rose_white, config.dark_red
+                        "SPLIT",
+                        250,
+                        DecisionButtons.y_axis,
+                        DecisionButtons.decision_button_width,
+                        DecisionButtons.decision_button_height,
+                        config.rose_white,
+                        config.dark_red,
                     )
                     split_button.bool_button()
                     if stand_button.is_displayed():
                         self.stand()
                     # buttons that return a boolean for new game and quit game
                     new_game_button = Button(
-                        "NEW GAME",
-                        600,
-                        500,
-                        80,
-                        40,
-                        config.rose_white,
-                        config.dark_red,
+                        "NEW GAME", 600, 500, 80, 40, config.rose_white, config.dark_red
                     )
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
@@ -96,15 +114,33 @@ class Table:
 
             # buttons for hit,stand,new game, and quit game
             hit_button = Button(
-                "HIT", 50, 500, 60, 30, config.light_gold, config.gold
+                "HIT",
+                DecisionButtons.hit_x_axis,
+                DecisionButtons.y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.light_gold,
+                config.gold,
             )
             hit_button.intro_button()
             stand_button = Button(
-                "STAND", 150, 500, 60, 30, config.light_gold, config.gold
+                "STAND",
+                150,
+                DecisionButtons.y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.light_gold,
+                config.gold,
             )
             stand_button.intro_button()
             split_button = Button(
-                "SPLIT", 250, 500, 60, 30, config.light_gold, config.gold
+                "SPLIT",
+                250,
+                DecisionButtons.y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.light_gold,
+                config.gold,
             )
             split_button.intro_button()
             new_game_button = Button(
@@ -164,11 +200,23 @@ class Table:
 
             # config.gameDisplay.fill(config.board_color)
             hit_button = Button(
-                "", 50, 500, 60, 30, config.board_color, config.board_color
+                "",
+                DecisionButtons.hit_x_axis,
+                DecisionButtons.y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.board_color,
+                config.board_color,
             )
             hit_button.intro_button()
             stand_button = Button(
-                "", 150, 500, 60, 30, config.board_color, config.board_color
+                "",
+                150,
+                DecisionButtons.y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.board_color,
+                config.board_color,
             )
             stand_button.intro_button()
             next_hand_button = Button(

@@ -1,11 +1,18 @@
 # Python Blackjack Game
 
 ## TODO:
-1. Refactor so that ControllerTick(): # Handle input events, ViewTick(): # Draw everything
-       - https://www.pygame.org/wiki/tut_design
+- Possible Features:
+1.      Refactor so that ControllerTick(): # Handle input events, ViewTick(): # Draw everything
+        - https://www.pygame.org/wiki/tut_design
           
-2. Balance needs to be subtracted whenever the hand begins, then
-   if the player loses, nothing happens. If they win, they get ante + winnings
+2.      Balance needs to be subtracted whenever the hand begins, then
+        if the player loses, nothing happens. If they win, they get ante + winnings.
+        In it's current state, a player could continue spamming new game to never
+        lose money. 
+
+3.      Move the player hand up so options can be center formatted for them?
+
+4.      Possibly add player "short hints" to the menu/game? 
    
 ## Note:
 test.txt contains specific packages used to test the project

@@ -57,9 +57,13 @@ class Table:
                     )
                     hit_button.intro_button()
                     stand_button = Button(
-                        "STAND", 200, 500, 60, 30, config.rose_white, config.dark_red
+                        "STAND", 150, 500, 60, 30, config.rose_white, config.dark_red
                     )
                     stand_button.bool_button()
+                    split_button = Button(
+                        "SPLIT", 250, 500, 60, 30, config.rose_white, config.dark_red
+                    )
+                    split_button.bool_button()
                     if stand_button.is_displayed():
                         self.stand()
                     # buttons that return a boolean for new game and quit game
@@ -67,8 +71,8 @@ class Table:
                         "NEW GAME",
                         600,
                         500,
-                        100,
-                        50,
+                        80,
+                        40,
                         config.rose_white,
                         config.dark_red,
                     )
@@ -96,9 +100,13 @@ class Table:
             )
             hit_button.intro_button()
             stand_button = Button(
-                "STAND", 200, 500, 60, 30, config.light_gold, config.gold
+                "STAND", 150, 500, 60, 30, config.light_gold, config.gold
             )
             stand_button.intro_button()
+            split_button = Button(
+                "SPLIT", 250, 500, 60, 30, config.light_gold, config.gold
+            )
+            split_button.intro_button()
             new_game_button = Button(
                 "NEW GAME", 600, 500, 80, 40, config.light_gold, config.gold
             )
@@ -156,11 +164,11 @@ class Table:
 
             # config.gameDisplay.fill(config.board_color)
             hit_button = Button(
-                "", 100, 500, 100, 50, config.board_color, config.board_color
+                "", 50, 500, 60, 30, config.board_color, config.board_color
             )
             hit_button.intro_button()
             stand_button = Button(
-                "", 300, 500, 100, 50, config.board_color, config.board_color
+                "", 150, 500, 60, 30, config.board_color, config.board_color
             )
             stand_button.intro_button()
             next_hand_button = Button(

@@ -14,7 +14,7 @@
 
 4.      Refactor buttons in the Table module 
 ### DONE
-~~Move the player hand up so options can be center formatted for them?~~
+~~Move the player hand up so options can be center formatted for them~~
 
 ## UML Diagram Images:
 ![Image of Call Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/UML_Call_Diagram.png)

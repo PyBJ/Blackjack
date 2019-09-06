@@ -34,16 +34,25 @@ $python __main__.py
 ![Image of Call Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/UML_Call_Diagram.png)
 ![Image of Class Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/Blackjack_Classes.png)
 
-## Project Execution Images:
+## Project Execution Images (9/5/2019):
 #### Start Menu
 ![Image of Starting Menu](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Starting_menu.PNG)
 #### Starting a New Game
 ![Image of Starting Game](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Start_game.PNG)
-#### Hitting and Staying Under 21
-![Image of Hitting and Drawing](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Hit_and_draw.PNG)
-#### Hitting and Winning
-![Image of Hitting and Winning](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Hit_and_win.PNG)
-#### Hitting and Going Over 21
-![Image of Hitting and Losing](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Hit_and_lose.PNG)
 #### Getting Blackjack
 ![Image of Getting Blackjack](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Blackjack.PNG)
+#### Hitting and Staying Under 21
+![Image of Hitting and Drawing](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Hit_under_21.PNG)
+#### Hitting and Busting
+![Image of Getting Blackjack](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Hit_over_21.PNG)
+#### Stand and Win
+![Image of Hitting and Winning](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Stand_and_win.PNG)
+#### Stand and Lose
+![Image of Hitting and Losing](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Stand_and_lose.PNG)
+#### Stand and Tie
+![Image of Getting Blackjack](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/Stand_and_tie.PNG)
+#### Dealer Bust
+![Image of Getting Blackjack](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/execution_images/dealer_bust.PNG)
+
+
+

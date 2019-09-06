@@ -7,15 +7,32 @@ from View.button import Button
 
 
 class DecisionButtons:
-    y_axis = 550
-    hit_x_axis = 40
-    stand_x_axis = 120
-    split_x_axis = 200
-    double_down_x_axis = 280
-    insurance_x_axis = 360
-    surrender_x_axis = 440
-    decision_button_width = 60
+    decision_y_axis = 550
+    hit_x_axis = 20
+    stand_x_axis = 130
+    split_x_axis = 240
+    double_down_x_axis = 350
+    insurance_x_axis = 460
+    surrender_x_axis = 570
+    decision_button_width = 90
     decision_button_height = 30
+
+
+class ControlButtons:
+    control_y_axis = 40
+    new_game_x_axis = 635
+    quit_x_axis = 755
+    control_button_width = 100
+    control_button_height = 40
+
+
+class PostGameButtons:
+    post_game_y_axis = 275
+    next_hand_x_axis = 200
+    post_new_game_x_axis = 500
+    post_quit_x_axis = 640
+    post_button_width = 100
+    post_button_height = 50
 
 
 class Table:
@@ -60,7 +77,7 @@ class Table:
                     hit_button = Button(
                         "HIT",
                         DecisionButtons.hit_x_axis,
-                        DecisionButtons.y_axis,
+                        DecisionButtons.decision_y_axis,
                         DecisionButtons.decision_button_width,
                         DecisionButtons.decision_button_height,
                         config.rose_white,
@@ -70,8 +87,8 @@ class Table:
                     hit_button.intro_button()
                     stand_button = Button(
                         "STAND",
-                        150,
-                        DecisionButtons.y_axis,
+                        DecisionButtons.stand_x_axis,
+                        DecisionButtons.decision_y_axis,
                         DecisionButtons.decision_button_width,
                         DecisionButtons.decision_button_height,
                         config.rose_white,
@@ -80,19 +97,51 @@ class Table:
                     stand_button.bool_button()
                     split_button = Button(
                         "SPLIT",
-                        250,
-                        DecisionButtons.y_axis,
+                        DecisionButtons.split_x_axis,
+                        DecisionButtons.decision_y_axis,
                         DecisionButtons.decision_button_width,
                         DecisionButtons.decision_button_height,
                         config.rose_white,
                         config.dark_red,
                     )
                     split_button.bool_button()
+                    double_down_button = Button(
+                        "DOUBLE DOWN",
+                        DecisionButtons.double_down_x_axis,
+                        DecisionButtons.decision_y_axis,
+                        DecisionButtons.decision_button_width,
+                        DecisionButtons.decision_button_height,
+                        config.rose_white,
+                        config.dark_red,
+                    )
+                    double_down_button.bool_button()
+                    insurance_button = Button(
+                        "INSURANCE",
+                        DecisionButtons.insurance_x_axis,
+                        DecisionButtons.decision_y_axis,
+                        DecisionButtons.decision_button_width,
+                        DecisionButtons.decision_button_height,
+                        config.rose_white,
+                        config.dark_red,
+                    )
+                    insurance_button.bool_button()
+                    surrender_button = Button(
+                        "SURRENDER",
+                        DecisionButtons.surrender_x_axis,
+                        DecisionButtons.decision_y_axis,
+                        DecisionButtons.decision_button_width,
+                        DecisionButtons.decision_button_height,
+                        config.rose_white,
+                        config.dark_red,
+                    )
+                    surrender_button.bool_button()
                     if stand_button.is_displayed():
                         self.stand()
                     # buttons that return a boolean for new game and quit game
                     new_game_button = Button(
-                        "NEW GAME", 600, 500, 80, 40, config.rose_white, config.dark_red
+                        "NEW GAME", ControlButtons.new_game_x_axis, ControlButtons.control_y_axis,
+                        ControlButtons.control_button_width, ControlButtons.control_button_height,
+                        config.rose_white, config.dark_red
                     )
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
@@ -100,10 +149,10 @@ class Table:
                         self.loop_1 = False
                     quit_button = Button(
                         "QUIT GAME",
-                        800,
-                        500,
-                        80,
-                        40,
+                        ControlButtons.quit_x_axis,
+                        ControlButtons.control_y_axis,
+                        ControlButtons.control_button_width,
+                        ControlButtons.control_button_height,
                         config.rose_white,
                         config.dark_red,
                     )
@@ -116,7 +165,7 @@ class Table:
             hit_button = Button(
                 "HIT",
                 DecisionButtons.hit_x_axis,
-                DecisionButtons.y_axis,
+                DecisionButtons.decision_y_axis,
                 DecisionButtons.decision_button_width,
                 DecisionButtons.decision_button_height,
                 config.light_gold,
@@ -125,8 +174,8 @@ class Table:
             hit_button.intro_button()
             stand_button = Button(
                 "STAND",
-                150,
-                DecisionButtons.y_axis,
+                DecisionButtons.stand_x_axis,
+                DecisionButtons.decision_y_axis,
                 DecisionButtons.decision_button_width,
                 DecisionButtons.decision_button_height,
                 config.light_gold,
@@ -135,20 +184,56 @@ class Table:
             stand_button.intro_button()
             split_button = Button(
                 "SPLIT",
-                250,
-                DecisionButtons.y_axis,
+                DecisionButtons.split_x_axis,
+                DecisionButtons.decision_y_axis,
                 DecisionButtons.decision_button_width,
                 DecisionButtons.decision_button_height,
                 config.light_gold,
                 config.gold,
             )
             split_button.intro_button()
+            double_down_button = Button(
+                "DOUBLE DOWN",
+                DecisionButtons.double_down_x_axis,
+                DecisionButtons.decision_y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.light_gold,
+                config.gold,
+            )
+            double_down_button.intro_button()
+            insurance_button = Button(
+                "INSURANCE",
+                DecisionButtons.insurance_x_axis,
+                DecisionButtons.decision_y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.light_gold,
+                config.gold,
+            )
+            insurance_button.intro_button()
+            surrender_button = Button(
+                "SURRENDER",
+                DecisionButtons.surrender_x_axis,
+                DecisionButtons.decision_y_axis,
+                DecisionButtons.decision_button_width,
+                DecisionButtons.decision_button_height,
+                config.light_gold,
+                config.gold,
+            )
+            surrender_button.intro_button()
             new_game_button = Button(
-                "NEW GAME", 600, 500, 80, 40, config.light_gold, config.gold
+                "NEW GAME", ControlButtons.new_game_x_axis, ControlButtons.control_y_axis,
+                ControlButtons.control_button_width, ControlButtons.control_button_height,
+                config.light_gold, config.gold
             )
             new_game_button.intro_button()
             quit_button = Button(
-                "QUIT GAME", 800, 500, 80, 40, config.light_gold, config.gold
+                "QUIT GAME", ControlButtons.quit_x_axis,
+                ControlButtons.control_y_axis,
+                ControlButtons.control_button_width,
+                ControlButtons.control_button_height,
+                config.light_gold, config.gold
             )
             quit_button.intro_button()
 
@@ -178,20 +263,28 @@ class Table:
                     quit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     next_hand_button = Button(
-                        "NEXT HAND", 100, 500, 80, 40, config.light_gold, config.gold
+                        "NEXT HAND", PostGameButtons.next_hand_x_axis,
+                        PostGameButtons.post_game_y_axis, PostGameButtons.post_button_width,
+                        PostGameButtons.post_button_height, config.light_gold, config.gold
                     )
                     next_hand_button.bool_button()
                     if next_hand_button.is_displayed():
                         self.loop_2 = False
                     new_game_button = Button(
-                        "NEW GAME", 600, 500, 80, 40, config.light_gold, config.gold
+                        "NEW GAME", PostGameButtons.post_new_game_x_axis,
+                        PostGameButtons.post_game_y_axis, PostGameButtons.post_button_width,
+                        PostGameButtons.post_button_height, config.light_gold, config.gold
                     )
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
                         self.loop_2 = False
                     quit_button = Button(
-                        "QUIT GAME", 800, 500, 80, 40, config.light_gold, config.gold
+                        "QUIT GAME", PostGameButtons.post_quit_x_axis,
+                        PostGameButtons.post_game_y_axis,
+                        PostGameButtons.post_button_width,
+                        PostGameButtons.post_button_height,
+                        config.light_gold, config.gold
                     )
                     quit_button.bool_button()
                     if quit_button.is_displayed():
@@ -202,7 +295,7 @@ class Table:
             hit_button = Button(
                 "",
                 DecisionButtons.hit_x_axis,
-                DecisionButtons.y_axis,
+                DecisionButtons.decision_y_axis,
                 DecisionButtons.decision_button_width,
                 DecisionButtons.decision_button_height,
                 config.board_color,
@@ -211,8 +304,8 @@ class Table:
             hit_button.intro_button()
             stand_button = Button(
                 "",
-                150,
-                DecisionButtons.y_axis,
+                DecisionButtons.stand_x_axis,
+                DecisionButtons.decision_y_axis,
                 DecisionButtons.decision_button_width,
                 DecisionButtons.decision_button_height,
                 config.board_color,
@@ -220,15 +313,18 @@ class Table:
             )
             stand_button.intro_button()
             next_hand_button = Button(
-                "NEXT HAND", 100, 500, 80, 40, config.light_gold, config.gold
+                "NEXT HAND", PostGameButtons.next_hand_x_axis,
+                PostGameButtons.post_game_y_axis, PostGameButtons.post_button_width, PostGameButtons.post_button_height, config.light_gold, config.gold
             )
             next_hand_button.bool_button()
             next_hand_button = Button(
-                "NEW GAME", 600, 500, 80, 40, config.light_gold, config.gold
+                "NEW GAME", PostGameButtons.post_new_game_x_axis, PostGameButtons.post_game_y_axis,
+                PostGameButtons.post_button_width, PostGameButtons.post_button_height, config.light_gold, config.gold
             )
             next_hand_button.intro_button()
             new_game_button = Button(
-                "QUIT GAME", 800, 500, 80, 40, config.light_gold, config.gold
+                "QUIT GAME", PostGameButtons.post_quit_x_axis,
+                PostGameButtons.post_game_y_axis, PostGameButtons.post_button_width, PostGameButtons.post_button_height, config.light_gold, config.gold
             )
             new_game_button.intro_button()
             pygame.display.update()
@@ -253,9 +349,9 @@ class Table:
             self:
             text (str):
         """
-        large_text = pygame.font.Font("freesansbold.ttf", 80)
+        large_text = pygame.font.Font("freesansbold.ttf", 40)
         text_surf, text_rect = self.text_objects(text, large_text)
-        text_rect.center = ((config.display_width / 2), (config.display_height / 2.5))
+        text_rect.center = ((config.display_width / 2), (config.display_height / 3))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets
@@ -323,12 +419,12 @@ class Table:
         Args:
             balance:
         """
-        mid_text = pygame.font.Font("freesansbold.ttf", 30)
+        mid_text = pygame.font.Font("freesansbold.ttf", 25)
         text_surf, text_rect = self.text_objects("Balance: " + balance, mid_text)
         # text_rect.top = (0, 0)
 
-        text_rect.right = 320
-        text_rect.bottom = 80
+        text_rect.right = 240
+        text_rect.bottom = 500
 
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()

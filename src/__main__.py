@@ -36,10 +36,10 @@ class ControlView:
         Raises:
             KeyError: EXAMPLE!!! REPLACE
         """
-        logger.debug("Create BlackjackController in ControlView")
+        logger.debug("Main: ControlView.__init__(): Create BlackjackController: controller in ControlView")
         self.controller = BlackjackController()
 
-        logger.debug("Create Table: new_table in ControlView")
+        logger.debug("Main: ControlView.__init__(): Create Table: new_table in ControlView")
         self.new_table = Table(self.controller)
 
     @staticmethod
@@ -51,21 +51,26 @@ class ControlView:
     # passes two objects that tell menu buttons where to go
     def meta_loop(self):
         """Outer game-control loop, controls exit and new_game."""
-        logger.debug("Run through ControlView meta_loop")
+        logger.info("Main: ControlView.meta_loop(): Start running through ControlView meta_loop")
         config.game_exit = Menu().game_menu()
         while not config.game_exit:
-            logger.debug("While config game_exit bool is FALSE: run table player_hand_loop() method,"
-                         " This loop simulates a blackjack game")
+            logger.debug("While config game_exit bool is FALSE: Simulate blackjack game\n\n")
             #  A player_hand_loop() is really a game loop? The debug message occurs
             #  Each time a new hand is initiated.
+            logger.debug("Main: meta_loop() calling Table player_hand_loop() method...")
             self.new_table.player_hand_loop()
+            logger.debug("Main: meta_loop() checking if \"NEW GAME\" or \"EXIT GAME\" pressed...")
             if config.new_game:
+                logger.debug("Main: meta_loop() ...\"NEW GAME\" HAS been pressed...")
                 self.controller = BlackjackController()
                 self.new_table = Table(self.controller)
                 config.new_game = False
             elif config.game_exit:
+                logger.debug("Main: meta_loop() ...\"EXIT GAME\" HAS been pressed...")
                 break
             else:
+                logger.debug("Main: meta_loop() ...\"NEW GAME\" and \"EXIT GAME\" NOT pressed\n")
+                logger.debug("Main: meta_loop() ... calling Table end_of_hand() method")
                 self.new_table.end_of_hand()
                 if config.new_game or config.end_shoe:
                     self.controller = BlackjackController()
@@ -86,7 +91,7 @@ if __name__ == "__main__":
     logging.basicConfig(
         filename=LOG_FILENAME,
         level=logging.DEBUG,
-        format="%(asctime)s - %(levelname)s - %(message)s (%(filename)s : %(lineno)d)",
+        format="%(asctime)s - %(levelname)s - (%(filename)s : %(lineno)d) - %(message)s ",
     )
     logging.getLogger().addHandler(logging.StreamHandler())
     ControlView().meta_loop()

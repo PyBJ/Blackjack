@@ -55,11 +55,15 @@ class Menu:
 
     # game_menu now returns a boolean value 0 for main game_loop or 1 for quit game
     def game_menu(self):
+        logger.info("[Menu: Menu.game_menu()] start going through method\n")
+        logger.debug("[Menu: Menu.game_menu()] set config.menu to TRUE")
         config.menu = True
-        logger.debug("Game menu generated in Menu class with game_menu function")
+        logger.debug("[Menu: Menu.game_menu()] WHILE config.menu is TRUE and "
+                     "game_loop / quit_game are FALSE, DO:")
         while config.menu and not self.game_loop and not self.quit_game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    logger.warning("event.type is equal to pygame.QUIT")
                     pygame.quit()
             config.game_display.fill(config.board_color)
             large_text = pygame.font.Font("freesansbold.ttf", 80)

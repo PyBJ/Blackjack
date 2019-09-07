@@ -1,5 +1,5 @@
 # Python Blackjack Game
-
+(Check release branch for the latest working release)
 ## TODO:
 - Possible Features:
 1.      Refactor so that ControllerTick(): # Handle input events, ViewTick(): # Draw everything

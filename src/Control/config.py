@@ -14,8 +14,7 @@ end_shoe_warn: bool = False
 crashed: bool = False
 blackjack: bool = False
 # colors
-# board_color = (255, 60, 90)
-board_color = (23, 79, 7)
+board_color = (28, 74, 50)
 black = (0, 0, 0)
 white = (255, 255, 255)
 rose_white = (235, 131, 131)
@@ -40,6 +39,8 @@ game_display = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption("BlackJack")
 clock = pygame.time.Clock()
 
+game_menu = pygame.image.load(r"C:\Users\Trevor\PythonProjects\Blackjack\possible_menu.png")
+hand_background = pygame.image.load(r"C:\Users\Trevor\PythonProjects\Blackjack\possible_game_2.png")
 
 # loads images in test folder
 # custom_images: custom cards
@@ -48,24 +49,24 @@ clock = pygame.time.Clock()
 custom_cards = []
 # card_images = []
 
-if platform.system() == "Windows":
-    # os.chdir(r"C:\Users\Trevor\PythonProjects\Blackjack-Project\src\View")
-    path = os.getcwd() + r"\Control\images\custom_cards"
-    for image in os.listdir(path):
-        custom_cards.append(
-            [pygame.image.load(path + "/" + image).convert_alpha(), image.strip(".gif")]
-        )
-    # path = os.getcwd() + r"\rimages\card_images"
-    # for image in os.listdir(path):
-    #     card_images.append(
-    #         [pygame.image.load(path + "/" + image).convert_alpha(), image.strip(".gif")]
-    #     )
-else:
-    path = os.getcwd() + "/Control/images/custom_cards"
-    for image in os.listdir(path):
-        custom_cards.append(
-            [pygame.image.load(path + "/" + image).convert_alpha(), image.strip(".gif")]
-        )
+# if platform.system() == "Windows":
+#     # os.chdir(r"C:\Users\Trevor\PythonProjects\Blackjack-Project\src\View")
+#     path = os.getcwd() + r"\Control\images\custom_cards"
+#     for image in os.listdir(path):
+#         custom_cards.append(
+#             [pygame.image.load(path + "/" + image).convert_alpha(), image.strip(".gif")]
+#         )
+#     # path = os.getcwd() + r"\rimages\card_images"
+#     # for image in os.listdir(path):
+#     #     card_images.append(
+#     #         [pygame.image.load(path + "/" + image).convert_alpha(), image.strip(".gif")]
+#     #     )
+# else:
+#     path = os.getcwd() + "/Control/images/custom_cards"
+#     for image in os.listdir(path):
+#         custom_cards.append(
+#             [pygame.image.load(path + "/" + image).convert_alpha(), image.strip(".gif")]
+#         )
     # path = os.getcwd() + "/images/card_images"
     # for image in os.listdir(path):
     #     card_images.append(

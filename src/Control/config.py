@@ -39,25 +39,12 @@ game_display = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption("BlackJack")
 clock = pygame.time.Clock()
 
-game_menu = pygame.image.load(r"C:\Users\Trevor\PythonProjects\Blackjack\possible_menu.png")
-hand_background = pygame.image.load(r"C:\Users\Trevor\PythonProjects\Blackjack\possible_game_2.png")
+if platform.system() == "Windows":
+    # os.chdir(r"C:\Users\Trevor\PythonProjects\Blackjack-Project\src\View")
+    path = os.getcwd() + r"\Control\images\background_images"
+    game_menu = pygame.image.load(path + "\possible_menu.png")
+    hand_background = pygame.image.load(path + "\possible_game_2.png")
 
-# loads images in test folder
-# custom_images: custom cards
-# card_images: open source cards
-# 2d list with two variables, pygame image and image name
-custom_cards = []
-# card_images = []
-
-# if platform.system() == "Windows":
-#     # os.chdir(r"C:\Users\Trevor\PythonProjects\Blackjack-Project\src\View")
-#     path = os.getcwd() + r"\Control\images\background_images"
-#     game_menu = pygame.image.load(path + "\possible_menu.png")
-#     hand_background = pygame.image.load(path + "\possible_game_2.png")
-#     for image in os.listdir(path):
-#         custom_cards.append(
-#             [pygame.image.load(path + "/" + image).convert_alpha(), image.strip(".gif")]
-#         )
 #     # path = os.getcwd() + r"\rimages\card_images"
 #     # for image in os.listdir(path):
 #     #     card_images.append(

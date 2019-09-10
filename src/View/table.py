@@ -22,9 +22,9 @@ class BlackjackHandButtons:
 
 
 class BlackjackGameButtons:
-    control_y_axis = 40
-    new_game_x_axis = 635
-    quit_x_axis = 755
+    control_y_axis = 153
+    new_game_x_axis = 650
+    quit_x_axis = 760
     control_button_width = 100
     control_button_height = 40
 
@@ -58,7 +58,8 @@ class Table:
         sound = Sound()
         sound.get_sound_effect("Deal4")
 
-        config.game_display.fill(config.board_color)
+        # config.game_display.fill(config.board_color)
+        config.game_display.blit(config.hand_background, [0, 0])
         self.show_dealers_hand()
         self.show_balance(str(self.control.get_players_balance()))
         # self.show_players_hand()
@@ -263,7 +264,9 @@ class Table:
     # End of Hand
     def end_of_hand(self):
         """The players hand is over"""
-        config.game_display.fill(config.board_color)
+        logger.info("[table: end_of_hand()] starting the end_of_hand() methods")
+        # config.game_display.fill(config.board_color)
+        config.game_display.blit(config.hand_background, [0, 0])
         self.show_balance(str(self.control.get_players_balance()))
         self.show_dealers_hand()
         self.show_players_hand()
@@ -366,9 +369,9 @@ class Table:
             self:
             text (str):
         """
-        large_text = pygame.font.Font("freesansbold.ttf", 40)
+        large_text = pygame.font.Font("freesansbold.ttf", 25)
         text_surf, text_rect = self.text_objects(text, large_text)
-        text_rect.center = ((config.display_width / 2), (config.display_height / 3))
+        text_rect.center = ((config.display_width / 1.5), (config.display_height / 9))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets
@@ -437,11 +440,11 @@ class Table:
             balance:
         """
         mid_text = pygame.font.Font("freesansbold.ttf", 25)
-        text_surf, text_rect = self.text_objects("Balance: " + balance, mid_text)
+        text_surf, text_rect = self.text_objects(balance, mid_text)
         # text_rect.top = (0, 0)
 
-        text_rect.right = 240
-        text_rect.bottom = 500
+        text_rect.right = 770
+        text_rect.bottom = 502
 
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()

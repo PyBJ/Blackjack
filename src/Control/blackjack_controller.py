@@ -32,19 +32,31 @@ class BlackjackController(object):
         logger.debug("[Bool: win] initialized to False in BlackjackController")
         self.win = False
 
-        logger.debug("[Int: default_balance] initialized to 10000 in BlackjackController")
+        logger.debug(
+            "[Int: default_balance] initialized to 10000 in BlackjackController"
+        )
         self.default_balance = 10000
 
         logger.debug("[Bool: starting_blackjack] initialized in BlackjackController")
         self.starting_blackjack = False
 
-        logger.debug("[Player: current_player] initialized in BlackjackController, cards dealt & balance")
-        self.current_player = BlackjackPlayer([self.current_deck.deal(), self.current_deck.deal()], self.default_balance)
+        logger.debug(
+            "[Player: current_player] initialized in BlackjackController, cards dealt & balance"
+        )
+        self.current_player = BlackjackPlayer(
+            [self.current_deck.deal(), self.current_deck.deal()], self.default_balance
+        )
 
-        logger.debug("[Dealer: current_dealer] initialized in BlackjackController, cards dealt & balance")
-        self.current_dealer = Dealer([self.current_deck.deal(), self.current_deck.deal()], self.default_balance)
+        logger.debug(
+            "[Dealer: current_dealer] initialized in BlackjackController, cards dealt & balance"
+        )
+        self.current_dealer = Dealer(
+            [self.current_deck.deal(), self.current_deck.deal()], self.default_balance
+        )
 
-        logger.debug("In BlackjackController.__init__, check if current_player has_blackjack()")
+        logger.debug(
+            "In BlackjackController.__init__, check if current_player has_blackjack()"
+        )
         if self.current_player.has_blackjack():
             logger.info("Player has Blackjack")
             self.win = True
@@ -63,14 +75,18 @@ class BlackjackController(object):
         return self.starting_blackjack
 
     def get_new_player_hand(self):
-        self.current_player.new_hand([self.current_deck.deal(), self.current_deck.deal()])
+        self.current_player.new_hand(
+            [self.current_deck.deal(), self.current_deck.deal()]
+        )
 
     def get_dealers_hand(self):
         """Returns dealer's hand"""
         return self.current_dealer.get_hand()
 
     def get_new_dealer_hand(self):
-        self.current_dealer.new_hand([self.current_deck.deal(), self.current_deck.deal()])
+        self.current_dealer.new_hand(
+            [self.current_deck.deal(), self.current_deck.deal()]
+        )
 
     def get_if_shoe_end(self):
         """Returns bool true if shoe card cut is drawn"""
@@ -132,5 +148,3 @@ class BlackjackController(object):
                     return "Dealer has BlackJack! You Lose!"
                 else:
                     return "It's a Tie!"
-
-

@@ -369,9 +369,9 @@ class Table:
             self:
             text (str):
         """
-        large_text = pygame.font.Font("freesansbold.ttf", 40)
+        large_text = pygame.font.Font("freesansbold.ttf", 25)
         text_surf, text_rect = self.text_objects(text, large_text)
-        text_rect.center = ((config.display_width / 2), (config.display_height / 3))
+        text_rect.center = ((config.display_width / 1.5), (config.display_height / 9))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets

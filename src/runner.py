@@ -8,8 +8,8 @@ import sys
 import logging
 
 
-logger = logging.getLogger("__main__")
-
+logger = logging.getLogger("runner")
+logger.debug("\n\n\n~~~~~NEW PROGRAM EXECUTION~~~~~\n\n")
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 

@@ -59,7 +59,7 @@ class Table:
         sound.get_sound_effect("Deal4")
 
         # config.game_display.fill(config.board_color)
-        config.game_display.blit(config.hand_background, [0, 0])
+        config.game_display.blit(config.table_background, [0, 0])
         self.show_dealers_hand()
         self.show_balance(str(self.control.get_players_balance()))
         # self.show_players_hand()
@@ -266,7 +266,7 @@ class Table:
         """The players hand is over"""
         logger.info("[table: end_of_hand()] starting the end_of_hand() methods")
         # config.game_display.fill(config.board_color)
-        config.game_display.blit(config.hand_background, [0, 0])
+        config.game_display.blit(config.table_background, [0, 0])
         self.show_balance(str(self.control.get_players_balance()))
         self.show_dealers_hand()
         self.show_players_hand()
@@ -390,7 +390,6 @@ class Table:
 
     def show_dealers_hand(self):
         """TODO: Add method description"""
-
         k = 1
         dealers_hand = self.control.get_dealers_hand()
         for i in range(len(dealers_hand)):
@@ -398,7 +397,7 @@ class Table:
             down = 50
             card = pygame.image.load(str(dealers_hand[i].get_filename()))
             config.game_display.blit(card, (right + k, down))
-            k += 30
+            k += 27
 
     def show_players_hand(self):
         """TODO: Add method description"""
@@ -410,7 +409,7 @@ class Table:
             down = 400
             card = pygame.image.load(str(players_hand[i].get_filename()))
             config.game_display.blit(card, (right + k, down))
-            k += 30
+            k += 27
 
     def hit(self):
         """TODO: Add method description"""

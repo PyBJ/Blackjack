@@ -30,10 +30,11 @@ class BlackjackGameButtons:
 
 
 class AfterBlackjackButtons:
-    post_game_y_axis = 275
+    post_game_type_y_axis = 200
+    next_hand_y_axis = 475
     next_hand_x_axis = 200
-    post_new_game_x_axis = 500
-    post_quit_x_axis = 640
+    post_new_game_x_axis = 630
+    post_quit_x_axis = 740
     post_button_width = 100
     post_button_height = 50
 
@@ -45,8 +46,8 @@ class Table:
             controller:
         """
         self.control = controller
-        self.loop_1 = True
-        self.loop_2 = True
+        self.hand_decisions_loop = True
+        self.post_hand_decisions_loop = True
         self.result_msg = ""
         self.balance = str(self.control.get_players_balance())
 
@@ -64,7 +65,7 @@ class Table:
         self.show_balance(str(self.control.get_players_balance()))
         # self.show_players_hand()
 
-        while self.loop_1:
+        while self.hand_decisions_loop:
             # checks to see if deck is empty
             if config.end_shoe is True:
                 self.end_of_shoe()
@@ -76,6 +77,7 @@ class Table:
                     config.game_exit = True
                     pygame.quit()
                     quit()
+                # Check if buttons have been pressed
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # buttons for hit and stand
                     hit_button = Button(
@@ -154,7 +156,7 @@ class Table:
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
-                        self.loop_1 = False
+                        self.hand_decisions_loop = False
                     quit_button = Button(
                         "QUIT GAME",
                         BlackjackGameButtons.quit_x_axis,
@@ -167,9 +169,9 @@ class Table:
                     quit_button.bool_button()
                     if quit_button.is_displayed():
                         config.game_exit = True
-                        self.loop_1 = False
+                        self.hand_decisions_loop = False
 
-            # buttons for hit,stand,new game, and quit game
+            # Display Buttons
             hit_button = Button(
                 "HIT",
                 BlackjackHandButtons.hit_x_axis,
@@ -256,22 +258,21 @@ class Table:
                 self.result_msg = "Blackjack! You Win!"
                 self.show_results(self.result_msg)
                 self.control.starting_blackjack = False
-                self.loop_1 = False
+                self.hand_decisions_loop = False
             pygame.display.update()
             config.clock.tick(15)
-        self.loop_1 = True
+        self.hand_decisions_loop = True
 
     # End of Hand
     def end_of_hand(self):
         """The players hand is over"""
         logger.info("[table: end_of_hand()] starting the end_of_hand() methods")
-        # config.game_display.fill(config.board_color)
         config.game_display.blit(config.table_background, [0, 0])
         self.show_balance(str(self.control.get_players_balance()))
         self.show_dealers_hand()
         self.show_players_hand()
         self.show_results(self.result_msg)
-        while self.loop_2:
+        while self.post_hand_decisions_loop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     config.game_exit = True
@@ -281,7 +282,7 @@ class Table:
                     next_hand_button = Button(
                         "NEXT HAND",
                         AfterBlackjackButtons.next_hand_x_axis,
-                        AfterBlackjackButtons.post_game_y_axis,
+                        AfterBlackjackButtons.next_hand_y_axis,
                         AfterBlackjackButtons.post_button_width,
                         AfterBlackjackButtons.post_button_height,
                         config.light_gold,
@@ -289,11 +290,11 @@ class Table:
                     )
                     next_hand_button.bool_button()
                     if next_hand_button.is_displayed():
-                        self.loop_2 = False
+                        self.post_hand_decisions_loop = False
                     new_game_button = Button(
                         "NEW GAME",
                         AfterBlackjackButtons.post_new_game_x_axis,
-                        AfterBlackjackButtons.post_game_y_axis,
+                        AfterBlackjackButtons.post_game_type_y_axis,
                         AfterBlackjackButtons.post_button_width,
                         AfterBlackjackButtons.post_button_height,
                         config.light_gold,
@@ -302,11 +303,11 @@ class Table:
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
-                        self.loop_2 = False
+                        self.post_hand_decisions_loop = False
                     quit_button = Button(
                         "QUIT GAME",
                         AfterBlackjackButtons.post_quit_x_axis,
-                        AfterBlackjackButtons.post_game_y_axis,
+                        AfterBlackjackButtons.post_game_type_y_axis,
                         AfterBlackjackButtons.post_button_width,
                         AfterBlackjackButtons.post_button_height,
                         config.light_gold,
@@ -315,12 +316,12 @@ class Table:
                     quit_button.bool_button()
                     if quit_button.is_displayed():
                         config.game_exit = True
-                        self.loop_2 = False
+                        self.post_hand_decisions_loop = False
 
             next_hand_button = Button(
                 "NEXT HAND",
                 AfterBlackjackButtons.next_hand_x_axis,
-                AfterBlackjackButtons.post_game_y_axis,
+                AfterBlackjackButtons.next_hand_y_axis,
                 AfterBlackjackButtons.post_button_width,
                 AfterBlackjackButtons.post_button_height,
                 config.light_gold,
@@ -330,7 +331,7 @@ class Table:
             next_hand_button = Button(
                 "NEW GAME",
                 AfterBlackjackButtons.post_new_game_x_axis,
-                AfterBlackjackButtons.post_game_y_axis,
+                AfterBlackjackButtons.post_game_type_y_axis,
                 AfterBlackjackButtons.post_button_width,
                 AfterBlackjackButtons.post_button_height,
                 config.light_gold,
@@ -340,7 +341,7 @@ class Table:
             new_game_button = Button(
                 "QUIT GAME",
                 AfterBlackjackButtons.post_quit_x_axis,
-                AfterBlackjackButtons.post_game_y_axis,
+                AfterBlackjackButtons.post_game_type_y_axis,
                 AfterBlackjackButtons.post_button_width,
                 AfterBlackjackButtons.post_button_height,
                 config.light_gold,
@@ -350,7 +351,7 @@ class Table:
             pygame.display.update()
             config.clock.tick(30)
         # Reset loop
-        self.loop_2 = True
+        self.post_hand_decisions_loop = True
 
     @staticmethod
     def text_objects(text, font):
@@ -359,7 +360,7 @@ class Table:
             text:
             font:
         """
-        text_surface = font.render(text, True, config.black)
+        text_surface = font.render(text, True, config.gold)
         return text_surface, text_surface.get_rect()
 
     @staticmethod
@@ -371,11 +372,11 @@ class Table:
         """
         large_text = pygame.font.Font("freesansbold.ttf", 25)
         text_surf, text_rect = self.text_objects(text, large_text)
-        text_rect.center = ((config.display_width / 1.5), (config.display_height / 9))
+        text_rect.center = ((config.display_width / 1.5), (config.display_height / 20))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets
-        time.sleep(1)
+        time.sleep(0.1)
 
     def end_of_shoe(self):
         """TODO: Add method description"""
@@ -424,7 +425,7 @@ class Table:
         self.result_msg = self.control.hit_dealer()
         self.show_dealers_hand()
         config.hand_loop = False
-        self.loop_1 = False
+        self.hand_decisions_loop = False
 
     def show_results(self, result_msg):
         """

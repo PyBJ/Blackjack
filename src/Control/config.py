@@ -48,3 +48,12 @@ else:
     path = os.getcwd() + "/Control/images/background_images"
     game_menu = pygame.image.load(path + "/possible_menu.png")
     table_background = pygame.image.load(path + "/possible_game_2.png")
+
+
+class UtilityFunctions:
+
+    def quit_game(self):
+        """call the pygame quit() method"""
+        game_exit = True
+        pygame.quit()
+        quit()

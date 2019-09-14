@@ -12,13 +12,11 @@
         
 3.      Possibly add player "short hints" to the menu/game?
 
-4.      Refactor buttons in the Table module 
+4.      Refactor buttons in the Table module
+
+5.      Inspect with "Hunter" 
 ### DONE
 ~~Move the player hand up so options can be center formatted for them~~
-
-## UML Diagram Images:
-![Image of Call Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/UML_Call_Diagram.png)
-![Image of Class Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/Blackjack_Classes.png)
 
 ## Project Execution Images (9/5/2019):
 #### Start Menu
@@ -39,6 +37,10 @@
 ![Image of Getting Blackjack](https://github.com/TrevorMcDougald/Blackjack/blob/master/doc/execution_images/Stand_and_tie.PNG)
 #### Stand and Dealer Bust
 ![Image of Getting Blackjack](https://github.com/TrevorMcDougald/Blackjack/blob/master/doc/execution_images/dealer_bust.PNG)
+
+## UML Diagram Images:
+![Image of Call Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/UML_Call_Diagram.png)
+![Image of Class Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/Blackjack_Classes.png)
 
 ## Note:
 test.txt contains specific packages used to test the project

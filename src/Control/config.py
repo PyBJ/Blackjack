@@ -19,7 +19,7 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 rose_white = (235, 131, 131)
 red = (255, 0, 0)
-dark_red = (194, 35, 35)
+dark_red = (134, 28, 28)
 green = (0, 255, 0)
 dark_green = (0, 200, 0)
 blue = (0, 0, 255)
@@ -42,9 +42,18 @@ clock = pygame.time.Clock()
 if platform.system() == "Windows":
     path = os.getcwd() + r"\Control\images\background_images"
     game_menu = pygame.image.load(path + "\possible_menu.png")
-    hand_background = pygame.image.load(path + "\possible_game_2.png")
+    table_background = pygame.image.load(path + "\possible_game_2.png")
 
 else:
     path = os.getcwd() + "/Control/images/background_images"
     game_menu = pygame.image.load(path + "/possible_menu.png")
-    hand_background = pygame.image.load(path + "/possible_game_2.png")
+    table_background = pygame.image.load(path + "/possible_game_2.png")
+
+
+class UtilityFunctions:
+
+    def quit_game(self):
+        """call the pygame quit() method"""
+        game_exit = True
+        pygame.quit()
+        quit()

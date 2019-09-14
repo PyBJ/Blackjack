@@ -2,6 +2,13 @@
 import pygame
 import time
 from Control import config
+from View.blackjack_game_buttons import BlackjackGameButtons
+from View.blackjack_surrender_button import BlackjackSurrenderButton
+from View.blackjack_insurance_button import BlackjackInsuranceButton
+from View.blackjack_double_down_button import BlackjackDoubleDownButton
+from View.blackjack_split_button import BlackjackSplitButton
+from View.blackjack_stand_button import BlackjackStandButton
+from View.blackjack_hit_button import BlackjackHitButton
 from View.soundeffects import Sound
 from View.button import Button
 import logging
@@ -9,31 +16,12 @@ import logging
 logger = logging.getLogger("table.py")
 
 
-class BlackjackHandButtons:
-    decision_y_axis = 550
-    hit_x_axis = 20
-    stand_x_axis = 130
-    split_x_axis = 240
-    double_down_x_axis = 350
-    insurance_x_axis = 460
-    surrender_x_axis = 570
-    decision_button_width = 90
-    decision_button_height = 30
-
-
-class BlackjackGameButtons:
-    control_y_axis = 153
-    new_game_x_axis = 650
-    quit_x_axis = 760
-    control_button_width = 100
-    control_button_height = 40
-
-
 class AfterBlackjackButtons:
-    post_game_y_axis = 275
+    post_game_type_y_axis = 200
+    next_hand_y_axis = 475
     next_hand_x_axis = 200
-    post_new_game_x_axis = 500
-    post_quit_x_axis = 640
+    post_new_game_x_axis = 630
+    post_quit_x_axis = 740
     post_button_width = 100
     post_button_height = 50
 
@@ -45,26 +33,31 @@ class Table:
             controller:
         """
         self.control = controller
-        self.loop_1 = True
-        self.loop_2 = True
+        self.hand_decisions_loop = True
+        self.post_hand_decisions_loop = True
         self.result_msg = ""
         self.balance = str(self.control.get_players_balance())
+
+    def check_quit_game(self, event):
+        if event.type == pygame.QUIT:
+            config.game_exit = True
+            pygame.quit()
+            quit()
 
     # Player Hand Loop sets config.new_game and config.game_exit or goes though hand
     def player_hand_loop(self):
         config.game_exit = False
-
         # Sound Effect of Dealing 4 cards
         sound = Sound()
         sound.get_sound_effect("Deal4")
 
         # config.game_display.fill(config.board_color)
-        config.game_display.blit(config.hand_background, [0, 0])
+        config.game_display.blit(config.table_background, [0, 0])
         self.show_dealers_hand()
         self.show_balance(str(self.control.get_players_balance()))
         # self.show_players_hand()
 
-        while self.loop_1:
+        while self.hand_decisions_loop:
             # checks to see if deck is empty
             if config.end_shoe is True:
                 self.end_of_shoe()
@@ -72,76 +65,32 @@ class Table:
             # event loop / NOT logic loop
             # creates a list of events per frame per second (mouse movement/clicks etc)
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    config.game_exit = True
-                    pygame.quit()
-                    quit()
+                self.check_quit_game(event)
+                # Check if buttons have been pressed
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    # buttons for hit and stand
-                    hit_button = Button(
-                        "HIT",
-                        BlackjackHandButtons.hit_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                        self.hit,
-                    )
-                    hit_button.intro_button()
-                    stand_button = Button(
-                        "STAND",
-                        BlackjackHandButtons.stand_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
+
+                    hit_button = BlackjackHitButton()
+                    hit_button.bool_button()
+                    if hit_button.is_displayed():
+                        self.hit()
+
+                    stand_button = BlackjackStandButton()
                     stand_button.bool_button()
-                    split_button = Button(
-                        "SPLIT",
-                        BlackjackHandButtons.split_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    split_button.bool_button()
-                    double_down_button = Button(
-                        "DOUBLE DOWN",
-                        BlackjackHandButtons.double_down_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    double_down_button.bool_button()
-                    insurance_button = Button(
-                        "INSURANCE",
-                        BlackjackHandButtons.insurance_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    insurance_button.bool_button()
-                    surrender_button = Button(
-                        "SURRENDER",
-                        BlackjackHandButtons.surrender_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    surrender_button.bool_button()
                     if stand_button.is_displayed():
                         self.stand()
-                    # buttons that return a boolean for new game and quit game
+
+                    split_button = BlackjackSplitButton()
+                    split_button.bool_button()
+
+                    double_down_button = BlackjackDoubleDownButton()
+                    double_down_button.bool_button()
+
+                    insurance_button = BlackjackInsuranceButton()
+                    insurance_button.bool_button()
+
+                    surrender_button = BlackjackSurrenderButton()
+                    surrender_button.bool_button()
+
                     new_game_button = Button(
                         "NEW GAME",
                         BlackjackGameButtons.new_game_x_axis,
@@ -154,7 +103,7 @@ class Table:
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
-                        self.loop_1 = False
+                        self.hand_decisions_loop = False
                     quit_button = Button(
                         "QUIT GAME",
                         BlackjackGameButtons.quit_x_axis,
@@ -167,121 +116,61 @@ class Table:
                     quit_button.bool_button()
                     if quit_button.is_displayed():
                         config.game_exit = True
-                        self.loop_1 = False
+                        self.hand_decisions_loop = False
 
-            # buttons for hit,stand,new game, and quit game
-            hit_button = Button(
-                "HIT",
-                BlackjackHandButtons.hit_x_axis,
-                BlackjackHandButtons.decision_y_axis,
-                BlackjackHandButtons.decision_button_width,
-                BlackjackHandButtons.decision_button_height,
-                config.light_gold,
-                config.gold,
-            )
+            # Display Buttons
+            hit_button = BlackjackHitButton()
             hit_button.intro_button()
-            stand_button = Button(
-                "STAND",
-                BlackjackHandButtons.stand_x_axis,
-                BlackjackHandButtons.decision_y_axis,
-                BlackjackHandButtons.decision_button_width,
-                BlackjackHandButtons.decision_button_height,
-                config.light_gold,
-                config.gold,
-            )
+
+            stand_button = BlackjackStandButton()
             stand_button.intro_button()
-            split_button = Button(
-                "SPLIT",
-                BlackjackHandButtons.split_x_axis,
-                BlackjackHandButtons.decision_y_axis,
-                BlackjackHandButtons.decision_button_width,
-                BlackjackHandButtons.decision_button_height,
-                config.light_gold,
-                config.gold,
-            )
+
+            split_button = BlackjackSplitButton()
             split_button.intro_button()
-            double_down_button = Button(
-                "DOUBLE DOWN",
-                BlackjackHandButtons.double_down_x_axis,
-                BlackjackHandButtons.decision_y_axis,
-                BlackjackHandButtons.decision_button_width,
-                BlackjackHandButtons.decision_button_height,
-                config.light_gold,
-                config.gold,
-            )
+
+            double_down_button = BlackjackDoubleDownButton()
             double_down_button.intro_button()
-            insurance_button = Button(
-                "INSURANCE",
-                BlackjackHandButtons.insurance_x_axis,
-                BlackjackHandButtons.decision_y_axis,
-                BlackjackHandButtons.decision_button_width,
-                BlackjackHandButtons.decision_button_height,
-                config.light_gold,
-                config.gold,
-            )
+
+            insurance_button = BlackjackInsuranceButton()
             insurance_button.intro_button()
-            surrender_button = Button(
-                "SURRENDER",
-                BlackjackHandButtons.surrender_x_axis,
-                BlackjackHandButtons.decision_y_axis,
-                BlackjackHandButtons.decision_button_width,
-                BlackjackHandButtons.decision_button_height,
-                config.light_gold,
-                config.gold,
-            )
+
+            surrender_button = BlackjackSurrenderButton()
             surrender_button.intro_button()
-            new_game_button = Button(
-                "NEW GAME",
-                BlackjackGameButtons.new_game_x_axis,
-                BlackjackGameButtons.control_y_axis,
-                BlackjackGameButtons.control_button_width,
-                BlackjackGameButtons.control_button_height,
-                config.light_gold,
-                config.gold,
-            )
-            new_game_button.intro_button()
-            quit_button = Button(
-                "QUIT GAME",
-                BlackjackGameButtons.quit_x_axis,
-                BlackjackGameButtons.control_y_axis,
-                BlackjackGameButtons.control_button_width,
-                BlackjackGameButtons.control_button_height,
-                config.light_gold,
-                config.gold,
-            )
-            quit_button.intro_button()
+
+            display_new_game_button = Button
+            BlackjackGameButtons.get_new_game_button(display_new_game_button)
+
+            display_quit_button = Button
+            BlackjackGameButtons.get_quit_button(display_quit_button)
 
             self.show_players_hand()
             if self.control.starting_blackjack:
                 self.result_msg = "Blackjack! You Win!"
                 self.show_results(self.result_msg)
                 self.control.starting_blackjack = False
-                self.loop_1 = False
+                self.hand_decisions_loop = False
             pygame.display.update()
             config.clock.tick(15)
-        self.loop_1 = True
+        self.hand_decisions_loop = True
 
     # End of Hand
     def end_of_hand(self):
         """The players hand is over"""
         logger.info("[table: end_of_hand()] starting the end_of_hand() methods")
-        # config.game_display.fill(config.board_color)
-        config.game_display.blit(config.hand_background, [0, 0])
+        config.game_display.blit(config.table_background, [0, 0])
         self.show_balance(str(self.control.get_players_balance()))
         self.show_dealers_hand()
         self.show_players_hand()
         self.show_results(self.result_msg)
-        while self.loop_2:
+        while self.post_hand_decisions_loop:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    config.game_exit = True
-                    pygame.quit()
-                    quit()
+                self.check_quit_game(event)
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     next_hand_button = Button(
                         "NEXT HAND",
                         AfterBlackjackButtons.next_hand_x_axis,
-                        AfterBlackjackButtons.post_game_y_axis,
+                        AfterBlackjackButtons.next_hand_y_axis,
                         AfterBlackjackButtons.post_button_width,
                         AfterBlackjackButtons.post_button_height,
                         config.light_gold,
@@ -289,11 +178,11 @@ class Table:
                     )
                     next_hand_button.bool_button()
                     if next_hand_button.is_displayed():
-                        self.loop_2 = False
+                        self.post_hand_decisions_loop = False
                     new_game_button = Button(
                         "NEW GAME",
                         AfterBlackjackButtons.post_new_game_x_axis,
-                        AfterBlackjackButtons.post_game_y_axis,
+                        AfterBlackjackButtons.post_game_type_y_axis,
                         AfterBlackjackButtons.post_button_width,
                         AfterBlackjackButtons.post_button_height,
                         config.light_gold,
@@ -302,11 +191,11 @@ class Table:
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
-                        self.loop_2 = False
+                        self.post_hand_decisions_loop = False
                     quit_button = Button(
                         "QUIT GAME",
                         AfterBlackjackButtons.post_quit_x_axis,
-                        AfterBlackjackButtons.post_game_y_axis,
+                        AfterBlackjackButtons.post_game_type_y_axis,
                         AfterBlackjackButtons.post_button_width,
                         AfterBlackjackButtons.post_button_height,
                         config.light_gold,
@@ -315,12 +204,12 @@ class Table:
                     quit_button.bool_button()
                     if quit_button.is_displayed():
                         config.game_exit = True
-                        self.loop_2 = False
+                        self.post_hand_decisions_loop = False
 
             next_hand_button = Button(
                 "NEXT HAND",
                 AfterBlackjackButtons.next_hand_x_axis,
-                AfterBlackjackButtons.post_game_y_axis,
+                AfterBlackjackButtons.next_hand_y_axis,
                 AfterBlackjackButtons.post_button_width,
                 AfterBlackjackButtons.post_button_height,
                 config.light_gold,
@@ -330,7 +219,7 @@ class Table:
             next_hand_button = Button(
                 "NEW GAME",
                 AfterBlackjackButtons.post_new_game_x_axis,
-                AfterBlackjackButtons.post_game_y_axis,
+                AfterBlackjackButtons.post_game_type_y_axis,
                 AfterBlackjackButtons.post_button_width,
                 AfterBlackjackButtons.post_button_height,
                 config.light_gold,
@@ -340,7 +229,7 @@ class Table:
             new_game_button = Button(
                 "QUIT GAME",
                 AfterBlackjackButtons.post_quit_x_axis,
-                AfterBlackjackButtons.post_game_y_axis,
+                AfterBlackjackButtons.post_game_type_y_axis,
                 AfterBlackjackButtons.post_button_width,
                 AfterBlackjackButtons.post_button_height,
                 config.light_gold,
@@ -350,7 +239,7 @@ class Table:
             pygame.display.update()
             config.clock.tick(30)
         # Reset loop
-        self.loop_2 = True
+        self.post_hand_decisions_loop = True
 
     @staticmethod
     def text_objects(text, font):
@@ -359,7 +248,7 @@ class Table:
             text:
             font:
         """
-        text_surface = font.render(text, True, config.black)
+        text_surface = font.render(text, True, config.gold)
         return text_surface, text_surface.get_rect()
 
     @staticmethod
@@ -371,11 +260,11 @@ class Table:
         """
         large_text = pygame.font.Font("freesansbold.ttf", 25)
         text_surf, text_rect = self.text_objects(text, large_text)
-        text_rect.center = ((config.display_width / 1.5), (config.display_height / 9))
+        text_rect.center = ((config.display_width / 1.5), (config.display_height / 20))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets
-        time.sleep(1)
+        time.sleep(0.1)
 
     def end_of_shoe(self):
         """TODO: Add method description"""
@@ -390,7 +279,6 @@ class Table:
 
     def show_dealers_hand(self):
         """TODO: Add method description"""
-
         k = 1
         dealers_hand = self.control.get_dealers_hand()
         for i in range(len(dealers_hand)):
@@ -398,7 +286,7 @@ class Table:
             down = 50
             card = pygame.image.load(str(dealers_hand[i].get_filename()))
             config.game_display.blit(card, (right + k, down))
-            k += 30
+            k += 27
 
     def show_players_hand(self):
         """TODO: Add method description"""
@@ -410,7 +298,7 @@ class Table:
             down = 400
             card = pygame.image.load(str(players_hand[i].get_filename()))
             config.game_display.blit(card, (right + k, down))
-            k += 30
+            k += 27
 
     def hit(self):
         """TODO: Add method description"""
@@ -425,7 +313,7 @@ class Table:
         self.result_msg = self.control.hit_dealer()
         self.show_dealers_hand()
         config.hand_loop = False
-        self.loop_1 = False
+        self.hand_decisions_loop = False
 
     def show_results(self, result_msg):
         """

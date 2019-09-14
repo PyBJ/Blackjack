@@ -8,8 +8,8 @@ import sys
 import logging
 
 
-logger = logging.getLogger("__main__")
-
+logger = logging.getLogger("runner")
+logger.debug("\n\n\n~~~~~NEW PROGRAM EXECUTION~~~~~\n\n")
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 
@@ -42,7 +42,7 @@ class ControlView:
         logger.debug("Main: ControlView.__init__(): Create Table: new_table in ControlView")
         self.new_table = Table(self.controller)
 
-    @staticmethod
+
     def quit_game():
         """call the pygame quit() method"""
         pygame.quit()

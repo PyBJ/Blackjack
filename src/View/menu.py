@@ -40,19 +40,6 @@ class Menu:
         text_surface = font.render(text, True, config.black)
         return text_surface, text_surface.get_rect()
 
-    # displays ace cards
-    # @staticmethod
-    # def ace_show(x, y):
-    #     """
-    #     Args:
-    #         x:
-    #         y:
-    #     """
-    #     config.game_display.blit(config.custom_cards[1][0], (x, y))
-    #     config.game_display.blit(config.custom_cards[0][0], (x + 100, y))
-    #     config.game_display.blit(config.custom_cards[3][0], (x + 200, y))
-    #     config.game_display.blit(config.custom_cards[2][0], (x + 300, y))
-
     # game_menu now returns a boolean value 0 for main game_loop or 1 for quit game
     def game_menu(self):
         logger.info("[Menu: Menu.game_menu()] start going through method\n")
@@ -68,23 +55,20 @@ class Menu:
             # config.game_display.fill(config.board_color)
             config.game_display.blit(config.game_menu, [0, 0])
 
-            # large_text = pygame.font.Font("freesansbold.ttf", 80)
-            # text_surf, text_rect = self.text_objects("BlackJack", large_text)
-            # text_rect.center = (
-            #     (config.display_width / 2),
-            #     (config.display_height / 2.9),
-            # )
-            # config.game_display.blit(text_surf, text_rect)
-
             play_button = Button(
-                "PLAY", 400, 355, 100, 50, config.rose_white, config.dark_red
+                "PLAY", 400, 250, 80, 40, config.rose_white, config.dark_red
             )
 
             play_button.bool_button()
+            help_button = Button(
+                #  TODO: Design Help_Button
+                "HELP", 400, 300, 80, 40, config.rose_white, config.dark_red
+            )
+            help_button.bool_button()
             self.game_loop = play_button.is_displayed()
 
             quit_button = Button(
-                "EXIT", 400, 280, 100, 50, config.rose_white, config.dark_red
+                "EXIT", 780, 20, 80, 40, config.rose_white, config.dark_red
             )
             quit_button.bool_button()
             self.quit_game = quit_button.is_displayed()

@@ -5,14 +5,14 @@ from Control import config
 class Button:
     def __init__(
         self,
-            button_label: str,
-            x_axis: int,
-            y_axis: int,
-            width: int,
-            height: int,
-            active_color,
-            inactive_color,
-            action=None,
+        button_label: str,
+        x_axis: int,
+        y_axis: int,
+        width: int,
+        height: int,
+        active_color,
+        inactive_color,
+        action=None,
     ):
         """
         Args:
@@ -31,8 +31,8 @@ class Button:
         self.button_label = button_label
         self.x_axis = x_axis
         self.y_axis = y_axis
-        self.width = width
-        self.height = height
+        self.start_x_pos = width
+        self.start_y_pos = height
         self.active_color = active_color
         self.inactive_color = inactive_color
         self.action = action
@@ -55,13 +55,13 @@ class Button:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         if (
-            self.x_axis + self.width > mouse[0] > self.x_axis
-            and self.y_axis + self.height > mouse[1] > self.y_axis
+            self.x_axis + self.start_x_pos > mouse[0] > self.x_axis
+            and self.y_axis + self.start_y_pos > mouse[1] > self.y_axis
         ):
             pygame.draw.rect(
                 config.game_display,
                 self.active_color,
-                (self.x_axis, self.y_axis, self.width, self.height),
+                (self.x_axis, self.y_axis, self.start_x_pos, self.start_y_pos),
             )
             if click[0] == 1 and self.action:
                 # POSSIBLE TEST CASE HERE
@@ -70,14 +70,14 @@ class Button:
             pygame.draw.rect(
                 config.game_display,
                 self.inactive_color,
-                (self.x_axis, self.y_axis, self.width, self.height),
+                (self.x_axis, self.y_axis, self.start_x_pos, self.start_y_pos),
             )
         small_text = pygame.font.Font("freesansbold.ttf", 10)
         text_surf, text_rect = self.text_objects(self.button_label, small_text)
         #                     center of x_axis     center of y_axis
         text_rect.center = (
-            (self.x_axis + (self.width / 2)),
-            (self.y_axis + (self.height / 2)),
+            (self.x_axis + (self.start_x_pos / 2)),
+            (self.y_axis + (self.start_y_pos / 2)),
         )
         config.game_display.blit(text_surf, text_rect)
 
@@ -86,13 +86,13 @@ class Button:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         if (
-            self.x_axis + self.width > mouse[0] > self.x_axis
-            and self.y_axis + self.height > mouse[1] > self.y_axis
+            self.x_axis + self.start_x_pos > mouse[0] > self.x_axis
+            and self.y_axis + self.start_y_pos > mouse[1] > self.y_axis
         ):
             pygame.draw.ellipse(
                 config.game_display,
                 self.active_color,
-                (self.x_axis, self.y_axis, self.width, self.height),
+                (self.x_axis, self.y_axis, self.start_x_pos, self.start_y_pos),
             )
             if click[0] == 1 and self.action:
                 self.action()
@@ -100,13 +100,13 @@ class Button:
             pygame.draw.ellipse(
                 config.game_display,
                 self.inactive_color,
-                (self.x_axis, self.y_axis, self.width, self.height),
+                (self.x_axis, self.y_axis, self.start_x_pos, self.start_y_pos),
             )
         button_text = pygame.font.SysFont("comicsans", 10)
         text_surf, text_ellip = self.text_objects(self.button_label, button_text)
         text_ellip.center = (
-            (self.x_axis + (self.width / 2)),
-            (self.y_axis + (self.height / 2)),
+            (self.x_axis + (self.start_x_pos / 2)),
+            (self.y_axis + (self.start_y_pos / 2)),
         )
         config.game_display.blit(text_surf, text_ellip)
 
@@ -115,13 +115,13 @@ class Button:
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         if (
-            self.x_axis + self.width > mouse[0] > self.x_axis
-            and self.y_axis + self.height > mouse[1] > self.y_axis
+            self.x_axis + self.start_x_pos > mouse[0] > self.x_axis
+            and self.y_axis + self.start_y_pos > mouse[1] > self.y_axis
         ):
             pygame.draw.rect(
                 config.game_display,
                 self.active_color,
-                (self.x_axis, self.y_axis, self.width, self.height),
+                (self.x_axis, self.y_axis, self.start_x_pos, self.start_y_pos),
             )
             if click[0] == 1:
                 # POSSIBLE TEST CASE HERE
@@ -130,16 +130,27 @@ class Button:
             pygame.draw.rect(
                 config.game_display,
                 self.inactive_color,
-                (self.x_axis, self.y_axis, self.width, self.height),
+                (self.x_axis, self.y_axis, self.start_x_pos, self.start_y_pos),
             )
         small_text = pygame.font.Font("freesansbold.ttf", 10)
         text_surf, text_rect = self.text_objects(self.button_label, small_text)
         #                     center of x_axis     center of y_axis
         text_rect.center = (
-            (self.x_axis + (self.width / 2)),
-            (self.y_axis + (self.height / 2)),
+            (self.x_axis + (self.start_x_pos / 2)),
+            (self.y_axis + (self.start_y_pos / 2)),
         )
         config.game_display.blit(text_surf, text_rect)
 
     def is_displayed(self) -> bool:
         return self.button_clicked
+
+    def is_selected(self):
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        if (
+            self.x_axis + self.start_x_pos > mouse[0] > self.x_axis
+            and self.y_axis + self.start_y_pos > mouse[1] > self.y_axis
+            and click[0] == 1
+        ):
+            # POSSIBLE TEST CASE HERE
+            return True

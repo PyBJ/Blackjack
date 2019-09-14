@@ -3,7 +3,12 @@ import pygame
 import time
 from Control import config
 from View.blackjack_game_buttons import BlackjackGameButtons
-from View.blackjack_hand_buttons import BlackjackHandButtons
+from View.blackjack_surrender_button import BlackjackSurrenderButton
+from View.blackjack_insurance_button import BlackjackInsuranceButton
+from View.blackjack_double_down_button import BlackjackDoubleDownButton
+from View.blackjack_split_button import BlackjackSplitButton
+from View.blackjack_stand_button import BlackjackStandButton
+from View.blackjack_hit_button import BlackjackHitButton
 from View.soundeffects import Sound
 from View.button import Button
 import logging
@@ -45,15 +50,6 @@ class Table:
         # Sound Effect of Dealing 4 cards
         sound = Sound()
         sound.get_sound_effect("Deal4")
-        
-        check_hit_button = Button
-        check_hit_button.action = self.hit
-        check_hit_button = BlackjackHandButtons.get_hit_button(Button)
-        check_stand_button = Button
-        check_split_button = Button
-        check_double_down_button = Button
-        check_insurance_button = Button
-        check_surrender_button = Button
 
         # config.game_display.fill(config.board_color)
         config.game_display.blit(config.table_background, [0, 0])
@@ -72,72 +68,29 @@ class Table:
                 self.check_quit_game(event)
                 # Check if buttons have been pressed
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    # buttons for hit and stand
-                    check_hit_button.action = self.hit
-                    # hit_button = Button(
-                    #     "HIT",
-                    #     BlackjackHandButtons.hit_x_axis,
-                    #     BlackjackHandButtons.decision_y_axis,
-                    #     BlackjackHandButtons.decision_button_width,
-                    #     BlackjackHandButtons.decision_button_height,
-                    #     config.rose_white,
-                    #     config.dark_red,
-                    #     self.hit,
-                    # )
-                    # hit_button.intro_button()
-                    stand_button = Button(
-                        "STAND",
-                        BlackjackHandButtons.stand_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
+
+                    hit_button = BlackjackHitButton()
+                    hit_button.bool_button()
+                    if hit_button.is_displayed():
+                        self.hit()
+
+                    stand_button = BlackjackStandButton()
                     stand_button.bool_button()
-                    split_button = Button(
-                        "SPLIT",
-                        BlackjackHandButtons.split_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    split_button.bool_button()
-                    double_down_button = Button(
-                        "DOUBLE DOWN",
-                        BlackjackHandButtons.double_down_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    double_down_button.bool_button()
-                    insurance_button = Button(
-                        "INSURANCE",
-                        BlackjackHandButtons.insurance_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    insurance_button.bool_button()
-                    surrender_button = Button(
-                        "SURRENDER",
-                        BlackjackHandButtons.surrender_x_axis,
-                        BlackjackHandButtons.decision_y_axis,
-                        BlackjackHandButtons.decision_button_width,
-                        BlackjackHandButtons.decision_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
-                    surrender_button.bool_button()
                     if stand_button.is_displayed():
                         self.stand()
-                    # buttons that return a boolean for new game and quit game
+
+                    split_button = BlackjackSplitButton()
+                    split_button.bool_button()
+
+                    double_down_button = BlackjackDoubleDownButton()
+                    double_down_button.bool_button()
+
+                    insurance_button = BlackjackInsuranceButton()
+                    insurance_button.bool_button()
+
+                    surrender_button = BlackjackSurrenderButton()
+                    surrender_button.bool_button()
+
                     new_game_button = Button(
                         "NEW GAME",
                         BlackjackGameButtons.new_game_x_axis,
@@ -166,23 +119,23 @@ class Table:
                         self.hand_decisions_loop = False
 
             # Display Buttons
-            display_hit_button = Button
-            BlackjackHandButtons.get_hit_button(display_hit_button)
+            hit_button = BlackjackHitButton()
+            hit_button.intro_button()
 
-            display_stand_button = Button
-            BlackjackHandButtons.get_stand_button(display_stand_button)
+            stand_button = BlackjackStandButton()
+            stand_button.intro_button()
 
-            display_split_button = Button
-            BlackjackHandButtons.get_split_button(display_split_button)
+            split_button = BlackjackSplitButton()
+            split_button.intro_button()
 
-            display_double_down_button = Button
-            BlackjackHandButtons.get_double_down_button(display_double_down_button)
+            double_down_button = BlackjackDoubleDownButton()
+            double_down_button.intro_button()
 
-            display_insurance_button = Button
-            BlackjackHandButtons.get_insurance_button(display_insurance_button)
+            insurance_button = BlackjackInsuranceButton()
+            insurance_button.intro_button()
 
-            display_surrender_button = Button
-            BlackjackHandButtons.get_surrender_button(display_surrender_button)
+            surrender_button = BlackjackSurrenderButton()
+            surrender_button.intro_button()
 
             display_new_game_button = Button
             BlackjackGameButtons.get_new_game_button(display_new_game_button)

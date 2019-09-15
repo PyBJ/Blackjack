@@ -42,7 +42,6 @@ class ControlView:
         logger.debug("Main: ControlView.__init__(): Create Table: new_table in ControlView")
         self.new_table = Table(self.controller)
 
-
     def quit_game():
         """call the pygame quit() method"""
         pygame.quit()

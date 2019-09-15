@@ -2,20 +2,19 @@
 import pygame
 import time
 from Control import config
-from View.blackjack_next_hand_button import BlackjackNextHandButton
-from View.blackjack_new_game_button import BlackjackPostHandNewGameButton
-from View.blackjack_quit_game_button import BlackjackPostHandQuitButton
-from View.blackjack_surrender_button import BlackjackSurrenderButton
-from View.blackjack_insurance_button import BlackjackInsuranceButton
-from View.blackjack_double_down_button import BlackjackDoubleDownButton
-from View.blackjack_split_button import BlackjackSplitButton
-from View.blackjack_stand_button import BlackjackStandButton
-from View.blackjack_hit_button import BlackjackHitButton
-from View.blackjack_new_game_button import BlackjackNewGameButton
-from View.blackjack_quit_game_button import BlackjackQuitButton
+from View.Buttons.blackjack_next_hand_button import BlackjackNextHandButton
+from View.Buttons.blackjack_new_game_button import BlackjackPostHandNewGameButton
+from View.Buttons.blackjack_quit_game_button import BlackjackPostHandQuitButton
+from View.Buttons.blackjack_surrender_button import BlackjackSurrenderButton
+from View.Buttons.blackjack_insurance_button import BlackjackInsuranceButton
+from View.Buttons.blackjack_double_down_button import BlackjackDoubleDownButton
+from View.Buttons.blackjack_split_button import BlackjackSplitButton
+from View.Buttons.blackjack_stand_button import BlackjackStandButton
+from View.Buttons.blackjack_hit_button import BlackjackHitButton
+from View.Buttons.blackjack_new_game_button import BlackjackNewGameButton
+from View.Buttons.blackjack_quit_game_button import BlackjackQuitButton
 
 from View.soundeffects import Sound
-from View.button import Button
 import logging
 
 logger = logging.getLogger("table.py")
@@ -61,7 +60,7 @@ class Table:
             # creates a list of events per frame per second (mouse movement/clicks etc)
             for event in pygame.event.get():
                 self.check_quit_game(event)
-                # Check if buttons have been pressed
+                # Check if Buttons have been pressed
                 if event.type == pygame.MOUSEBUTTONDOWN:
 
                     hit_button = BlackjackHitButton()

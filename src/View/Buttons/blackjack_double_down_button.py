@@ -1,6 +1,6 @@
 from Control import config
-from View.blackjack_hand_button_view import BlackjackHandButtonView
-from View.button import Button
+from View.Buttons.blackjack_hand_button_view import BlackjackHandButtonView
+from View.Buttons.button import Button
 
 
 class BlackjackDoubleDownButton(Button):

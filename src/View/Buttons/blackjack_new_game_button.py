@@ -1,7 +1,7 @@
 from Control import config
-from View.blackjack_game_button_view import BlackjackGameButtonView
-from View.blackjack_post_hand_button_view import BlackjackPostHandButtonView
-from View.button import Button
+from View.Buttons.blackjack_game_button_view import BlackjackGameButtonView
+from View.Buttons.blackjack_post_hand_button_view import BlackjackPostHandButtonView
+from View.Buttons.button import Button
 
 
 class BlackjackNewGameButton(Button):

@@ -1,6 +1,6 @@
 import pygame
 from Control import config
-from View.button import Button
+from View.Buttons.button import Button
 import logging
 
 logger = logging.getLogger("menu.py")

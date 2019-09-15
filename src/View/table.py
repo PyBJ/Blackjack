@@ -2,7 +2,7 @@
 import pygame
 import time
 from Control import config
-from View.blackjack_post_hand_button_parameters import BlackjackNextHandButton
+from View.blackjack_next_hand_button import BlackjackNextHandButton
 from View.blackjack_new_game_button import BlackjackPostHandNewGameButton
 from View.blackjack_quit_game_button import BlackjackPostHandQuitButton
 from View.blackjack_surrender_button import BlackjackSurrenderButton

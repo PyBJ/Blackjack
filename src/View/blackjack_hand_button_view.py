@@ -1,4 +1,4 @@
-class BlackjackHandButtonParam:
+class BlackjackHandButtonView:
     decision_y_axis = 550
     hit_x_axis = 20
     stand_x_axis = 130

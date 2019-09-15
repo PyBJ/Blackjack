@@ -1,5 +1,5 @@
 from Control import config
-from View.blackjack_hand_button_parameters import BlackjackHandButtonParam
+from View.blackjack_hand_button_view import BlackjackHandButtonView
 from View.button import Button
 
 
@@ -7,10 +7,10 @@ class BlackjackStandButton(Button):
     def __init__(self):
         super(BlackjackStandButton, self).__init__(
             "STAND",
-            BlackjackHandButtonParam.stand_x_axis,
-            BlackjackHandButtonParam.decision_y_axis,
-            BlackjackHandButtonParam.decision_button_width,
-            BlackjackHandButtonParam.decision_button_height,
+            BlackjackHandButtonView.stand_x_axis,
+            BlackjackHandButtonView.decision_y_axis,
+            BlackjackHandButtonView.decision_button_width,
+            BlackjackHandButtonView.decision_button_height,
             config.light_gold,
             config.gold,
         )

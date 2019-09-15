@@ -1,4 +1,4 @@
-class BlackjackGameButtonParameters:
+class BlackjackGameButtonView:
     control_y_axis = 153
     new_game_x_axis = 650
     quit_x_axis = 760

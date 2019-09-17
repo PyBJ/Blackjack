@@ -1,5 +1,5 @@
 from Control import config
-from View.Buttons.blackjack_hand_button_view import BlackjackHandButtonView
+from View.Buttons.view_blackjack_hand_button import BlackjackHandButtonView
 from View.Buttons.button import Button
 
 

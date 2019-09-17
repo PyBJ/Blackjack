@@ -4,5 +4,3 @@ class BlackjackGameButtonView:
     quit_x_axis = 760
     control_button_width = 100
     control_button_height = 40
-
-

@@ -13,6 +13,7 @@ from View.Buttons.blackjack_stand_button import BlackjackStandButton
 from View.Buttons.blackjack_hit_button import BlackjackHitButton
 from View.Buttons.blackjack_new_game_button import BlackjackNewGameButton
 from View.Buttons.blackjack_quit_game_button import BlackjackQuitButton
+from View.hand import show_players_hand, show_dealers_hand
 
 from View.soundeffects import Sound
 import logging
@@ -47,7 +48,7 @@ class Table:
 
         # config.game_display.fill(config.board_color)
         config.game_display.blit(config.table_background, [0, 0])
-        self.show_dealers_hand()
+        show_dealers_hand(self.control)
         self.show_balance(str(self.control.get_players_balance()))
         # self.show_players_hand()
 
@@ -122,7 +123,7 @@ class Table:
             display_quit_button = BlackjackQuitButton()
             display_quit_button.intro_button()
 
-            self.show_players_hand()
+            show_players_hand(self.control)
             if self.control.starting_blackjack:
                 self.result_msg = "Blackjack! You Win!"
                 self.show_results(self.result_msg)
@@ -138,8 +139,8 @@ class Table:
         logger.info("[table: end_of_hand()] starting the end_of_hand() methods")
         config.game_display.blit(config.table_background, [0, 0])
         self.show_balance(str(self.control.get_players_balance()))
-        self.show_dealers_hand()
-        self.show_players_hand()
+        show_dealers_hand(self.control)
+        show_players_hand(self.control)
         self.show_results(self.result_msg)
         while self.post_hand_decisions_loop:
             for event in pygame.event.get():
@@ -214,29 +215,6 @@ class Table:
         pygame.display.update()
         # starts game loop over and resets
 
-    def show_dealers_hand(self):
-        """TODO: Add method description"""
-        k = 1
-        dealers_hand = self.control.get_dealers_hand()
-        for i in range(len(dealers_hand)):
-            right = 350
-            down = 50
-            card = pygame.image.load(str(dealers_hand[i].get_filename()))
-            config.game_display.blit(card, (right + k, down))
-            k += 27
-
-    def show_players_hand(self):
-        """TODO: Add method description"""
-
-        k = 1
-        players_hand = self.control.get_players_hand()
-        for i in range(len(players_hand)):
-            right = 350
-            down = 400
-            card = pygame.image.load(str(players_hand[i].get_filename()))
-            config.game_display.blit(card, (right + k, down))
-            k += 27
-
     def hit(self):
         """TODO: Add method description"""
 
@@ -248,7 +226,7 @@ class Table:
         """TODO: Add method description"""
 
         self.result_msg = self.control.hit_dealer()
-        self.show_dealers_hand()
+        show_dealers_hand(self.control)
         config.hand_loop = False
         self.hand_decisions_loop = False
 

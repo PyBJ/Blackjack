@@ -6,5 +6,3 @@ class BlackjackPostHandButtonView:
     post_quit_x_axis = 740
     post_button_width = 100
     post_button_height = 50
-
-

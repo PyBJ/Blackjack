@@ -8,5 +8,3 @@ class BlackjackHandButtonView:
     surrender_x_axis = 570
     decision_button_width = 90
     decision_button_height = 30
-
-

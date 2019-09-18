@@ -64,6 +64,9 @@ class BlackjackController(object):
             self.starting_blackjack = True
         logger.info("Player Doesn't have Blackjack")
 
+    def subtract_players_ante(self):
+        self.current_player.subtract_ante()
+
     def get_players_balance(self):
         return self.current_player.get_balance()
 
@@ -136,15 +139,15 @@ class BlackjackController(object):
                 return "You lose!"
             elif player_score == dealer_score:
                 if (
-                    self.current_player.has_blackjack()
-                    and not self.current_dealer.has_blackjack()
+                        self.current_player.has_blackjack()
+                        and not self.current_dealer.has_blackjack()
                 ):
                     self.win = True
                     self.current_player.update_balance(self.bet_amount, self.win)
                     return "BlackJack! You Win!"
                 elif (
-                    not self.current_player.has_blackjack()
-                    and self.current_dealer.has_blackjack()
+                        not self.current_player.has_blackjack()
+                        and self.current_dealer.has_blackjack()
                 ):
                     self.win = False
                     self.current_player.update_balance(self.bet_amount, self.win)

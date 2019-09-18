@@ -31,8 +31,9 @@ class Table:
         self.hand_decisions_loop = True
         self.post_hand_decisions_loop = True
         self.result_msg = ""
-        self.balance = str(self.control.get_players_balance())
-        self.ante = str(self.control.get_players_bet())
+        self.balance = self.control.get_players_balance()
+        self.ante = self.control.get_players_bet()
+        self.pay_ante = False
 
     def check_quit_game(self, event):
         if event.type == pygame.QUIT:
@@ -49,9 +50,14 @@ class Table:
 
         # config.game_display.fill(config.board_color)
         config.game_display.blit(config.table_background, [0, 0])
-        show_dealers_hand(self.control)
-        self.show_balance(str(self.control.get_players_balance()))
-        self.show_bet(str(self.control.get_players_bet()))
+        # show_dealers_hand(self.control)
+        # self.control.subtract_players_ante()
+        if not self.pay_ante:
+            self.control.subtract_players_ante()
+            self.pay_ante = True
+            self.display_balance_and_bet()
+        else:
+            self.display_balance_and_bet()
         # self.show_players_hand()
 
         while self.hand_decisions_loop:
@@ -125,6 +131,7 @@ class Table:
             display_quit_button = BlackjackQuitButton()
             display_quit_button.intro_button()
 
+            show_dealers_hand(self.control)
             show_players_hand(self.control)
             if self.control.starting_blackjack:
                 self.result_msg = "Blackjack! You Win!"
@@ -140,7 +147,9 @@ class Table:
         """The players hand is over"""
         logger.info("[table: end_of_hand()] starting the end_of_hand() methods")
         config.game_display.blit(config.table_background, [0, 0])
-        self.show_balance(str(self.control.get_players_balance()))
+        self.pay_ante = False
+        self.display_balance_and_bet()
+
         show_dealers_hand(self.control)
         show_players_hand(self.control)
         self.show_results(self.result_msg)
@@ -180,6 +189,9 @@ class Table:
             config.clock.tick(30)
         # Reset loop
         self.post_hand_decisions_loop = True
+
+    def subtract_ante(self):
+        self.balance - self.ante
 
     @staticmethod
     def gold_text_objects(text, font):
@@ -279,3 +291,8 @@ class Table:
 
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
+
+    def display_balance_and_bet(self):
+        self.show_balance(str(self.control.get_players_balance()))
+        self.show_bet(str(self.control.get_players_bet()))
+

@@ -1,5 +1,5 @@
 # Python Blackjack Game
-(Check release branch for the latest working release) test
+(Check release branch for the latest working release) tes
 
 ## Project Execution Images (9/5/2019):
 #### Start Menu

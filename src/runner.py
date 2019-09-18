@@ -42,13 +42,12 @@ class ControlView:
         logger.debug("Main: ControlView.__init__(): Create Table: new_table in ControlView")
         self.new_table = Table(self.controller)
 
-
     def quit_game():
         """call the pygame quit() method"""
         pygame.quit()
         quit()
 
-    # passes two objects that tell menu buttons where to go
+    # passes two objects that tell menu Buttons where to go
     def meta_loop(self):
         """Outer game-control loop, controls exit and new_game."""
         logger.info("Main: ControlView.meta_loop(): Start running through ControlView meta_loop")
@@ -58,6 +57,7 @@ class ControlView:
             #  A player_hand_loop() is really a game loop? The debug message occurs
             #  Each time a new hand is initiated.
             logger.debug("Main: meta_loop() calling Table player_hand_loop() method...")
+            self.new_table.subtract_ante()
             self.new_table.player_hand_loop()
             logger.debug("Main: meta_loop() checking if \"NEW GAME\" or \"EXIT GAME\" pressed...")
             if config.new_game:

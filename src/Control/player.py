@@ -12,6 +12,7 @@ class BlackjackPlayer(Player):
         """
         self.hand = cards
         self.balance = balance
+        self.bet = 100
         """Turns each card faceUp"""
         for card in self.hand:
             card.turn()
@@ -33,6 +34,9 @@ class BlackjackPlayer(Player):
     def get_balance(self):
         return self.balance
 
+    def subtract_ante(self):
+        self.balance = self.balance - self.bet
+
     def update_balance(self, bet_amount, win):
         """
         Args:
@@ -40,9 +44,9 @@ class BlackjackPlayer(Player):
             win:
         """
         if win:
-            self.balance = self.balance + bet_amount
-        else:
-            self.balance = self.balance - bet_amount
+            self.balance = self.balance + bet_amount * 2
+        # else:
+            # self.balance = self.balance - bet_amount
 
     def get_score(self) -> int:
         score = 0

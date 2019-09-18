@@ -2,28 +2,23 @@
 import pygame
 import time
 from Control import config
-from View.blackjack_game_buttons import BlackjackGameButtons
-from View.blackjack_surrender_button import BlackjackSurrenderButton
-from View.blackjack_insurance_button import BlackjackInsuranceButton
-from View.blackjack_double_down_button import BlackjackDoubleDownButton
-from View.blackjack_split_button import BlackjackSplitButton
-from View.blackjack_stand_button import BlackjackStandButton
-from View.blackjack_hit_button import BlackjackHitButton
+from View.Buttons.blackjack_next_hand_button import BlackjackNextHandButton
+from View.Buttons.blackjack_new_game_button import BlackjackPostHandNewGameButton
+from View.Buttons.blackjack_quit_game_button import BlackjackPostHandQuitButton
+from View.Buttons.blackjack_surrender_button import BlackjackSurrenderButton
+from View.Buttons.blackjack_insurance_button import BlackjackInsuranceButton
+from View.Buttons.blackjack_double_down_button import BlackjackDoubleDownButton
+from View.Buttons.blackjack_split_button import BlackjackSplitButton
+from View.Buttons.blackjack_stand_button import BlackjackStandButton
+from View.Buttons.blackjack_hit_button import BlackjackHitButton
+from View.Buttons.blackjack_new_game_button import BlackjackNewGameButton
+from View.Buttons.blackjack_quit_game_button import BlackjackQuitButton
+from View.hand import show_players_hand, show_dealers_hand
+
 from View.soundeffects import Sound
-from View.button import Button
 import logging
 
 logger = logging.getLogger("table.py")
-
-
-class AfterBlackjackButtons:
-    post_game_type_y_axis = 200
-    next_hand_y_axis = 475
-    next_hand_x_axis = 200
-    post_new_game_x_axis = 630
-    post_quit_x_axis = 740
-    post_button_width = 100
-    post_button_height = 50
 
 
 class Table:
@@ -36,7 +31,9 @@ class Table:
         self.hand_decisions_loop = True
         self.post_hand_decisions_loop = True
         self.result_msg = ""
-        self.balance = str(self.control.get_players_balance())
+        self.balance = self.control.get_players_balance()
+        self.ante = self.control.get_players_bet()
+        self.pay_ante = False
 
     def check_quit_game(self, event):
         if event.type == pygame.QUIT:
@@ -53,8 +50,14 @@ class Table:
 
         # config.game_display.fill(config.board_color)
         config.game_display.blit(config.table_background, [0, 0])
-        self.show_dealers_hand()
-        self.show_balance(str(self.control.get_players_balance()))
+        # show_dealers_hand(self.control)
+        # self.control.subtract_players_ante()
+        if not self.pay_ante:
+            self.control.subtract_players_ante()
+            self.pay_ante = True
+            self.display_balance_and_bet()
+        else:
+            self.display_balance_and_bet()
         # self.show_players_hand()
 
         while self.hand_decisions_loop:
@@ -66,7 +69,7 @@ class Table:
             # creates a list of events per frame per second (mouse movement/clicks etc)
             for event in pygame.event.get():
                 self.check_quit_game(event)
-                # Check if buttons have been pressed
+                # Check if Buttons have been pressed
                 if event.type == pygame.MOUSEBUTTONDOWN:
 
                     hit_button = BlackjackHitButton()
@@ -91,28 +94,13 @@ class Table:
                     surrender_button = BlackjackSurrenderButton()
                     surrender_button.bool_button()
 
-                    new_game_button = Button(
-                        "NEW GAME",
-                        BlackjackGameButtons.new_game_x_axis,
-                        BlackjackGameButtons.control_y_axis,
-                        BlackjackGameButtons.control_button_width,
-                        BlackjackGameButtons.control_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
+                    new_game_button = BlackjackNewGameButton()
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
                         self.hand_decisions_loop = False
-                    quit_button = Button(
-                        "QUIT GAME",
-                        BlackjackGameButtons.quit_x_axis,
-                        BlackjackGameButtons.control_y_axis,
-                        BlackjackGameButtons.control_button_width,
-                        BlackjackGameButtons.control_button_height,
-                        config.rose_white,
-                        config.dark_red,
-                    )
+
+                    quit_button = BlackjackQuitButton()
                     quit_button.bool_button()
                     if quit_button.is_displayed():
                         config.game_exit = True
@@ -137,13 +125,14 @@ class Table:
             surrender_button = BlackjackSurrenderButton()
             surrender_button.intro_button()
 
-            display_new_game_button = Button
-            BlackjackGameButtons.get_new_game_button(display_new_game_button)
+            display_new_game_button = BlackjackNewGameButton()
+            display_new_game_button.intro_button()
 
-            display_quit_button = Button
-            BlackjackGameButtons.get_quit_button(display_quit_button)
+            display_quit_button = BlackjackQuitButton()
+            display_quit_button.intro_button()
 
-            self.show_players_hand()
+            show_dealers_hand(self.control)
+            show_players_hand(self.control)
             if self.control.starting_blackjack:
                 self.result_msg = "Blackjack! You Win!"
                 self.show_results(self.result_msg)
@@ -158,97 +147,70 @@ class Table:
         """The players hand is over"""
         logger.info("[table: end_of_hand()] starting the end_of_hand() methods")
         config.game_display.blit(config.table_background, [0, 0])
-        self.show_balance(str(self.control.get_players_balance()))
-        self.show_dealers_hand()
-        self.show_players_hand()
+        self.pay_ante = False
+        self.display_balance_and_bet()
+
+        show_dealers_hand(self.control)
+        show_players_hand(self.control)
         self.show_results(self.result_msg)
         while self.post_hand_decisions_loop:
             for event in pygame.event.get():
                 self.check_quit_game(event)
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    next_hand_button = Button(
-                        "NEXT HAND",
-                        AfterBlackjackButtons.next_hand_x_axis,
-                        AfterBlackjackButtons.next_hand_y_axis,
-                        AfterBlackjackButtons.post_button_width,
-                        AfterBlackjackButtons.post_button_height,
-                        config.light_gold,
-                        config.gold,
-                    )
+
+                    next_hand_button = BlackjackNextHandButton()
                     next_hand_button.bool_button()
                     if next_hand_button.is_displayed():
                         self.post_hand_decisions_loop = False
-                    new_game_button = Button(
-                        "NEW GAME",
-                        AfterBlackjackButtons.post_new_game_x_axis,
-                        AfterBlackjackButtons.post_game_type_y_axis,
-                        AfterBlackjackButtons.post_button_width,
-                        AfterBlackjackButtons.post_button_height,
-                        config.light_gold,
-                        config.gold,
-                    )
+
+                    new_game_button = BlackjackPostHandNewGameButton()
                     new_game_button.bool_button()
                     if new_game_button.is_displayed():
                         config.new_game = True
                         self.post_hand_decisions_loop = False
-                    quit_button = Button(
-                        "QUIT GAME",
-                        AfterBlackjackButtons.post_quit_x_axis,
-                        AfterBlackjackButtons.post_game_type_y_axis,
-                        AfterBlackjackButtons.post_button_width,
-                        AfterBlackjackButtons.post_button_height,
-                        config.light_gold,
-                        config.gold,
-                    )
+
+                    quit_button = BlackjackPostHandQuitButton()
                     quit_button.bool_button()
                     if quit_button.is_displayed():
                         config.game_exit = True
                         self.post_hand_decisions_loop = False
 
-            next_hand_button = Button(
-                "NEXT HAND",
-                AfterBlackjackButtons.next_hand_x_axis,
-                AfterBlackjackButtons.next_hand_y_axis,
-                AfterBlackjackButtons.post_button_width,
-                AfterBlackjackButtons.post_button_height,
-                config.light_gold,
-                config.gold,
-            )
-            next_hand_button.bool_button()
-            next_hand_button = Button(
-                "NEW GAME",
-                AfterBlackjackButtons.post_new_game_x_axis,
-                AfterBlackjackButtons.post_game_type_y_axis,
-                AfterBlackjackButtons.post_button_width,
-                AfterBlackjackButtons.post_button_height,
-                config.light_gold,
-                config.gold,
-            )
+            next_hand_button = BlackjackNextHandButton()
             next_hand_button.intro_button()
-            new_game_button = Button(
-                "QUIT GAME",
-                AfterBlackjackButtons.post_quit_x_axis,
-                AfterBlackjackButtons.post_game_type_y_axis,
-                AfterBlackjackButtons.post_button_width,
-                AfterBlackjackButtons.post_button_height,
-                config.light_gold,
-                config.gold,
-            )
+
+            new_game_button = BlackjackPostHandNewGameButton()
             new_game_button.intro_button()
+
+            quit_button = BlackjackPostHandQuitButton()
+            quit_button.intro_button()
+
             pygame.display.update()
             config.clock.tick(30)
         # Reset loop
         self.post_hand_decisions_loop = True
 
+    def subtract_ante(self):
+        self.balance - self.ante
+
     @staticmethod
-    def text_objects(text, font):
+    def gold_text_objects(text, font):
         """
         Args:
             text:
             font:
         """
         text_surface = font.render(text, True, config.gold)
+        return text_surface, text_surface.get_rect()
+
+    @staticmethod
+    def red_text_objects(text, font):
+        """
+        Args:
+            text:
+            font:
+        """
+        text_surface = font.render(text, True, config.deep_red)
         return text_surface, text_surface.get_rect()
 
     @staticmethod
@@ -259,7 +221,7 @@ class Table:
             text (str):
         """
         large_text = pygame.font.Font("freesansbold.ttf", 25)
-        text_surf, text_rect = self.text_objects(text, large_text)
+        text_surf, text_rect = self.gold_text_objects(text, large_text)
         text_rect.center = ((config.display_width / 1.5), (config.display_height / 20))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
@@ -271,34 +233,11 @@ class Table:
 
         text = "End of Shoe, New Deck after re-deal"
         medium_text = pygame.font.Font("freesansbold.ttf", 50)
-        text_surf, text_rect = self.text_objects(text, medium_text)
+        text_surf, text_rect = self.gold_text_objects(text, medium_text)
         text_rect.center = ((config.display_width / 2), (config.display_height / 3.5))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # starts game loop over and resets
-
-    def show_dealers_hand(self):
-        """TODO: Add method description"""
-        k = 1
-        dealers_hand = self.control.get_dealers_hand()
-        for i in range(len(dealers_hand)):
-            right = 350
-            down = 50
-            card = pygame.image.load(str(dealers_hand[i].get_filename()))
-            config.game_display.blit(card, (right + k, down))
-            k += 27
-
-    def show_players_hand(self):
-        """TODO: Add method description"""
-
-        k = 1
-        players_hand = self.control.get_players_hand()
-        for i in range(len(players_hand)):
-            right = 350
-            down = 400
-            card = pygame.image.load(str(players_hand[i].get_filename()))
-            config.game_display.blit(card, (right + k, down))
-            k += 27
 
     def hit(self):
         """TODO: Add method description"""
@@ -311,7 +250,7 @@ class Table:
         """TODO: Add method description"""
 
         self.result_msg = self.control.hit_dealer()
-        self.show_dealers_hand()
+        show_dealers_hand(self.control)
         config.hand_loop = False
         self.hand_decisions_loop = False
 
@@ -328,7 +267,7 @@ class Table:
             balance:
         """
         mid_text = pygame.font.Font("freesansbold.ttf", 25)
-        text_surf, text_rect = self.text_objects(balance, mid_text)
+        text_surf, text_rect = self.gold_text_objects(balance, mid_text)
         # text_rect.top = (0, 0)
 
         text_rect.right = 770
@@ -337,3 +276,23 @@ class Table:
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # time.sleep(1)
+
+    def show_bet(self, ante):
+        """
+        Args:
+            ante:
+        """
+        mid_text = pygame.font.Font("freesansbold.ttf", 40)
+        text_surf, text_rect = self.red_text_objects(ante, mid_text)
+        # text_rect.top = (0, 0)
+
+        text_rect.right = 485
+        text_rect.bottom = 305
+
+        config.game_display.blit(text_surf, text_rect)
+        pygame.display.update()
+
+    def display_balance_and_bet(self):
+        self.show_balance(str(self.control.get_players_balance()))
+        self.show_bet(str(self.control.get_players_bet()))
+

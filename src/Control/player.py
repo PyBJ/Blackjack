@@ -12,6 +12,7 @@ class BlackjackPlayer(Player):
         """
         self.hand = cards
         self.balance = balance
+        self.bet = 100
         """Turns each card faceUp"""
         for card in self.hand:
             card.turn()

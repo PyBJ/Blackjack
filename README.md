@@ -1,22 +1,5 @@
 # Python Blackjack Game
 (Check release branch for the latest working release)
-## TODO:
-- Possible Features:
-1.      Refactor so that ControllerTick(): # Handle input events, ViewTick(): # Draw everything
-        - https://www.pygame.org/wiki/tut_design
-          
-2.      Balance needs to be subtracted whenever the hand begins, then
-        if the player loses, nothing happens. If they win, they get ante + winnings.
-        In it's current state, a player could continue spamming new game to never
-        lose money. 
-        
-3.      Possibly add player "short hints" to the menu/game?
-
-4.      Refactor buttons in the Table module
-
-5.      Inspect with "Hunter" 
-### DONE
-~~Move the player hand up so options can be center formatted for them~~
 
 ## Project Execution Images (9/5/2019):
 #### Start Menu
@@ -41,6 +24,23 @@
 ## UML Diagram Images:
 ![Image of Call Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/UML_Call_Diagram.png)
 ![Image of Class Diagram](https://github.com/CS4398-SM-Group2/Blackjack-Project/blob/feature/doc/Blackjack_Classes.png)
+
+## TODO:
+- Possible Features:
+1.      Refactor so that ControllerTick(): # Handle input events, ViewTick(): # Draw everything
+        - https://www.pygame.org/wiki/tut_design
+          
+2.      Balance needs to be subtracted whenever the hand begins, then
+        if the player loses, nothing happens. If they win, they get ante + winnings.
+        In it's current state, a player could continue spamming new game to never
+        lose money. 
+        
+3.      Possibly add player "short hints" to the menu/game?
+ 
+### DONE
+~~Move the player hand up so options can be center formatted for them~~
+~~Refactor table buttons~~
+
 
 ## Note:
 test.txt contains specific packages used to test the project

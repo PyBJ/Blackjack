@@ -1,4 +1,4 @@
-class BlackjackHandButtonParam:
+class BlackjackHandButtonView:
     decision_y_axis = 550
     hit_x_axis = 20
     stand_x_axis = 130
@@ -8,5 +8,3 @@ class BlackjackHandButtonParam:
     surrender_x_axis = 570
     decision_button_width = 90
     decision_button_height = 30
-
-

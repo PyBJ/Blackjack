@@ -67,6 +67,9 @@ class BlackjackController(object):
     def get_players_balance(self):
         return self.current_player.get_balance()
 
+    def get_players_bet(self):
+        return self.bet_amount
+
     def get_players_hand(self):
         """Returns player's hand"""
         return self.current_player.get_hand()

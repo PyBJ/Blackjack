@@ -42,13 +42,12 @@ class ControlView:
         logger.debug("Main: ControlView.__init__(): Create Table: new_table in ControlView")
         self.new_table = Table(self.controller)
 
-
     def quit_game():
         """call the pygame quit() method"""
         pygame.quit()
         quit()
 
-    # passes two objects that tell menu buttons where to go
+    # passes two objects that tell menu Buttons where to go
     def meta_loop(self):
         """Outer game-control loop, controls exit and new_game."""
         logger.info("Main: ControlView.meta_loop(): Start running through ControlView meta_loop")

@@ -32,6 +32,7 @@ class Table:
         self.post_hand_decisions_loop = True
         self.result_msg = ""
         self.balance = str(self.control.get_players_balance())
+        self.ante = str(self.control.get_players_bet())
 
     def check_quit_game(self, event):
         if event.type == pygame.QUIT:
@@ -50,6 +51,7 @@ class Table:
         config.game_display.blit(config.table_background, [0, 0])
         show_dealers_hand(self.control)
         self.show_balance(str(self.control.get_players_balance()))
+        self.show_bet(str(self.control.get_players_bet()))
         # self.show_players_hand()
 
         while self.hand_decisions_loop:
@@ -180,13 +182,23 @@ class Table:
         self.post_hand_decisions_loop = True
 
     @staticmethod
-    def text_objects(text, font):
+    def gold_text_objects(text, font):
         """
         Args:
             text:
             font:
         """
         text_surface = font.render(text, True, config.gold)
+        return text_surface, text_surface.get_rect()
+
+    @staticmethod
+    def red_text_objects(text, font):
+        """
+        Args:
+            text:
+            font:
+        """
+        text_surface = font.render(text, True, config.deep_red)
         return text_surface, text_surface.get_rect()
 
     @staticmethod
@@ -197,7 +209,7 @@ class Table:
             text (str):
         """
         large_text = pygame.font.Font("freesansbold.ttf", 25)
-        text_surf, text_rect = self.text_objects(text, large_text)
+        text_surf, text_rect = self.gold_text_objects(text, large_text)
         text_rect.center = ((config.display_width / 1.5), (config.display_height / 20))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
@@ -209,7 +221,7 @@ class Table:
 
         text = "End of Shoe, New Deck after re-deal"
         medium_text = pygame.font.Font("freesansbold.ttf", 50)
-        text_surf, text_rect = self.text_objects(text, medium_text)
+        text_surf, text_rect = self.gold_text_objects(text, medium_text)
         text_rect.center = ((config.display_width / 2), (config.display_height / 3.5))
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
@@ -243,7 +255,7 @@ class Table:
             balance:
         """
         mid_text = pygame.font.Font("freesansbold.ttf", 25)
-        text_surf, text_rect = self.text_objects(balance, mid_text)
+        text_surf, text_rect = self.gold_text_objects(balance, mid_text)
         # text_rect.top = (0, 0)
 
         text_rect.right = 770
@@ -252,3 +264,18 @@ class Table:
         config.game_display.blit(text_surf, text_rect)
         pygame.display.update()
         # time.sleep(1)
+
+    def show_bet(self, ante):
+        """
+        Args:
+            ante:
+        """
+        mid_text = pygame.font.Font("freesansbold.ttf", 40)
+        text_surf, text_rect = self.red_text_objects(ante, mid_text)
+        # text_rect.top = (0, 0)
+
+        text_rect.right = 485
+        text_rect.bottom = 305
+
+        config.game_display.blit(text_surf, text_rect)
+        pygame.display.update()

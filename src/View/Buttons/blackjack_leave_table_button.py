@@ -4,10 +4,10 @@ from View.Buttons.view_blackjack_post_hand_button import BlackjackPostHandButton
 from View.Buttons.button import Button
 
 
-class BlackjackNewGameButton(Button):
+class BlackjackLeaveTableButton(Button):
     def __init__(self):
-        super(BlackjackNewGameButton, self).__init__(
-            "NEW GAME",
+        super(BlackjackLeaveTableButton, self).__init__(
+            "LEAVE TABLE",
             BlackjackGameButtonView.new_game_x_axis,
             BlackjackGameButtonView.control_y_axis,
             BlackjackGameButtonView.control_button_width,
@@ -18,10 +18,10 @@ class BlackjackNewGameButton(Button):
         self.intro_button()
 
 
-class BlackjackPostHandNewGameButton(Button):
+class BlackjackPostHandLeaveTableButton(Button):
     def __init__(self):
-        super(BlackjackPostHandNewGameButton, self).__init__(
-            "NEW GAME",
+        super(BlackjackPostHandLeaveTableButton, self).__init__(
+            "LEAVE TABLE",
             BlackjackPostHandButtonView.post_new_game_x_axis,
             BlackjackPostHandButtonView.post_game_type_y_axis,
             BlackjackPostHandButtonView.post_button_width,

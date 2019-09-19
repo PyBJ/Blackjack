@@ -153,4 +153,6 @@ class BlackjackController(object):
                     self.current_player.update_balance(self.bet_amount, self.win)
                     return "Dealer has BlackJack! You Lose!"
                 else:
+                    self.current_player.update_balance(self.bet_amount/2, self.win)
                     return "It's a Tie!"
+

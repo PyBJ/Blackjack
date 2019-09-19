@@ -57,7 +57,6 @@ class ControlView:
             #  A player_hand_loop() is really a game loop? The debug message occurs
             #  Each time a new hand is initiated.
             logger.debug("Main: meta_loop() calling Table player_hand_loop() method...")
-            self.new_table.subtract_ante()
             self.new_table.player_hand_loop()
             logger.debug("Main: meta_loop() checking if \"NEW GAME\" or \"EXIT GAME\" pressed...")
             if config.new_game:

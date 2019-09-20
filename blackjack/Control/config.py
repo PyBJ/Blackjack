@@ -42,12 +42,12 @@ clock = pygame.time.Clock()
 
 if platform.system() == "Windows":
     path = os.getcwd() + r"\Control\images\background_images"
-    game_menu = pygame.image.load(path + "\possible_menu.png")
+    game_menu = pygame.image.load(path + "\possible_menu_2.png")
     table_background = pygame.image.load(path + "\possible_game_2.png")
 
 else:
     path = os.getcwd() + "/Control/images/background_images"
-    game_menu = pygame.image.load(path + "/possible_menu.png")
+    game_menu = pygame.image.load(path + "/possible_menu_2.png")
     table_background = pygame.image.load(path + "/possible_game_2.png")
 
 
